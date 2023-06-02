@@ -1,0 +1,387 @@
+/* #region - snippets */
+html {
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+    margin: 0
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+    display: block
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+figcaption,
+figure,
+main {
+    display: block
+}
+
+figure {
+    margin: 1em 40px
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible
+}
+
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted
+}
+
+b,
+strong {
+    font-weight: inherit
+}
+
+b,
+strong {
+    font-weight: bolder
+}
+
+code,
+kbd,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+dfn {
+    font-style: italic
+}
+
+mark {
+    background-color: #ff0;
+    color: #000
+}
+
+small {
+    font-size: 80%
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sub {
+    bottom: -.25em
+}
+
+sup {
+    top: -.5em
+}
+
+audio,
+video {
+    display: inline-block
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+
+img {
+    border-style: none
+}
+
+svg:not(:root) {
+    overflow: hidden
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0
+}
+
+button,
+input {
+    overflow: visible
+}
+
+button,
+select {
+    text-transform: none
+}
+
+button,
+html [type=button],
+[type=reset],
+[type=submit] {
+    -webkit-appearance: button
+}
+
+button::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
+
+button:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
+    outline: 1px dotted ButtonText
+}
+
+fieldset {
+    padding: .35em .75em .625em
+}
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal
+}
+
+progress {
+    display: inline-block;
+    vertical-align: baseline
+}
+
+textarea {
+    overflow: auto
+}
+
+[type=checkbox],
+[type=radio] {
+    box-sizing: border-box;
+    padding: 0
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+    height: auto
+}
+
+[type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px
+}
+
+[type=search]::-webkit-search-cancel-button,
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit
+}
+
+details,
+menu {
+    display: block
+}
+
+summary {
+    display: list-item
+}
+
+canvas {
+    display: inline-block
+}
+
+template {
+    display: none
+}
+
+[hidden] {
+    display: none
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* #endregion - snippets */
+
+/* #region - stops scroll bounce */
+html,
+body {
+    display: grid;
+    overflow: hidden;
+}
+
+#root {
+    /* removes default margins */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* prevent mobile scroll bouncing */
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/* #endregion - stop scroll bounce */
+
+/* #region - variables */
+:root {
+    --background-green: hsl(121, 71%, 15%);
+    --chalk-text: hsla(0, 0%, 100%, 0.7);
+    --footer-gradient: linear-gradient(hsl(34, 72%, 35%), hsl(34, 73%, 20%));
+    --header-gradient: linear-gradient(hsl(34, 73%, 20%), hsl(34, 72%, 35%));
+    --title-font: 'Londrina Outline', cursive;
+    --work-area-font: 'Callie Chalk Font', sans-serif;
+}
+
+/* #endregion - variables */
+
+body {
+    height: 100vh;
+    background: url("./images/textures/chalkboard_texture_wgrain.png") no-repeat, var(--background-green);
+    background-size: cover;
+    background-position-x: center;
+    opacity: 0.8;
+}
+
+/* #region - header and footer */
+/* head and foot wood texture */
+header,
+footer {
+    height: 100px;
+    width: 100%;
+}
+
+header {
+    background: var(--header-gradient);
+}
+
+.wood {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    mix-blend-mode: soft-light;
+}
+
+.top-frame {
+    background: url("./images/textures/long_wood_grain.png"), var(--header-gradient);
+    background-position-y: bottom;
+}
+
+footer {
+    background: var(--footer-gradient);
+}
+
+.bottom-frame {
+    background: url("./images/textures/long_wood_grain.png");
+}
+
+.title-text {
+    font-family: var(--title-font);
+    font-size: 10vh;
+    margin: 1vh;
+    padding: 0 25px;
+}
+
+/* #endregion - header and footer */
+
+.apple {
+    width: 100px;
+}
+
+/* #region - range */
+
+.selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    display: inline-block;
+    background-color: transparent;
+    border-style: none;
+    border-bottom: 3px solid var(--chalk-text);
+    /* width: 4vmax; */
+    height: 4vmax;
+    font-family: var(--work-area-font);
+    font-size: 3vmax;
+    text-align: center;
+    padding: 2px 4px;
+    caret-color: var(--chalk-text);
+    /* removes default focus style */
+    outline: none;
+}
+
+button {
+    border: 3px solid hsla(170, 35%, 69%, 0.7);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    padding: 5px 5px 0 5px;
+}
+
+button:hover {
+    text-shadow: 0 0 20px hsla(0, 0%, 100%, 0.7);
+}
+
+/* #endregion - range */
+
+/* #region - timer */
+.timer-box {
+    font-size: 4vmin;
+    font-family: var(--work-area-font);
+}
+
+/* #endregion - timer */

@@ -277,6 +277,22 @@ body {
 
 /* #endregion - stop scroll bounce */
 
+/* #region - default styles */
+.wrapper {
+    max-width: 1080px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    width: auto;
+    height: 100%;
+}
+
+/* #endregion - default styles */
+
+
 /* #region - variables */
 :root {
     --background-green: hsl(121, 71%, 15%);
@@ -288,6 +304,45 @@ body {
 }
 
 /* #endregion - variables */
+
+/* #region - text */
+.title-text,
+.work-area,
+.range,
+.timer-section,
+button,
+.total,
+fieldset {
+    text-align: center;
+    opacity: 0.8;
+    /* #region - font chalk texture */
+    background: url(./images/textures/white_chalk_texture.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    /* #endregion - font chalk texture */
+}
+
+.work-area,
+.range,
+button,
+fieldset {
+    font-family: var(--work-area-font);
+    font-size: 2vmax;
+}
+
+fieldset {
+    border-style: solid;
+    border-width: 10px;
+}
+
+.timer-section {
+    font-size: 4vmin;
+    font-family: var(--work-area-font);
+}
+
+/* #endregion - text */
 
 body {
     height: 100vh;
@@ -301,7 +356,7 @@ body {
 /* head and foot wood texture */
 header,
 footer {
-    height: 100px;
+    height: 65px;
     width: 100%;
 }
 
@@ -332,15 +387,43 @@ footer {
 .title-text {
     font-family: var(--title-font);
     font-size: 10vh;
-    margin: 1vh;
+    /* margin: 1vh; */
     padding: 0 25px;
 }
 
 /* #endregion - header and footer */
 
-.apple {
-    width: 100px;
+/* #region - main */
+main {
+    height: calc(100vh - (65px * 2));
 }
+
+/* #endregion - main */
+
+/* #region - timer */
+
+.timer-section {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    justify-content: center;
+}
+
+.apple-container {
+    display: flex;
+    background: url("./images/chalk_apple.png") no-repeat;
+    background-size: contain;
+    background-position-x: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.timer-text {
+    margin: 0
+}
+
+/* #endregion - timer */
+
 
 /* #region - range */
 
@@ -367,6 +450,7 @@ footer {
 }
 
 button {
+    background: none;
     border: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     padding: 5px 5px 0 5px;
@@ -377,11 +461,3 @@ button:hover {
 }
 
 /* #endregion - range */
-
-/* #region - timer */
-.timer-box {
-    font-size: 4vmin;
-    font-family: var(--work-area-font);
-}
-
-/* #endregion - timer */

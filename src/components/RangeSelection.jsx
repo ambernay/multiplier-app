@@ -3,7 +3,7 @@ import React from "react";
 function RangeSelection(props) {
 
     return (
-        <div className="range">
+        <section className="range">
             <form onSubmit={props.handleSubmitRange}>
                 <fieldset className="selection">
                     <legend>Choose Table Range:</legend>
@@ -18,7 +18,7 @@ function RangeSelection(props) {
                 </fieldset>
                 <button>Make Table</button>
             </form>
-        </div>
+        </section>
     )
 }
 

@@ -7,13 +7,13 @@ function Timer(props) {
     const correctAnswerTotal = props.correctAnswerCount
 
     return (
-        <div className="timer-box">
+        <section className="timer-section">
             <h3 className="timer-text">Timer</h3>
-            <div className="apple-wrapper">
-                <img className="apple" src="../images/chalk_apple.png" alt="chalk apple" />
+            <div className="apple-container">
+                {/* <img className="apple" src="../images/chalk_apple.png" alt="chalk apple" /> */}
                 <h3 className="total">{correctAnswerTotal}/{equationTotal}</h3>
             </div>
-        </div>
+        </section>
     )
 }
 

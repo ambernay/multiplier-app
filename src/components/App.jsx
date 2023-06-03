@@ -39,19 +39,21 @@ function App() {
                 <Heading />
             </header>
             <main>
-                <WorkArea
-                    firstNumSelection={firstNum}
-                    secondNumSelection={secondNum}
-                    equationCounter={(e) => { setEquationCount(equationCount + 1) }}
-                    correctAnswerCount={(e) => { setCorrectAnswerCount(correctAnswerCount + 1) }}
-                />
-                <RangeSelection
-                    handleSubmitRange={handleSubmitRange}
-                />
-                <Timer
-                    equationTotal={equationCount}
-                    correctAnswerCount={correctAnswerCount}
-                />
+                <div className="wrapper">
+                    <WorkArea
+                        firstNumSelection={firstNum}
+                        secondNumSelection={secondNum}
+                        equationCounter={(e) => { setEquationCount(equationCount + 1) }}
+                        correctAnswerCount={(e) => { setCorrectAnswerCount(correctAnswerCount + 1) }}
+                    />
+                    <RangeSelection
+                        handleSubmitRange={handleSubmitRange}
+                    />
+                    <Timer
+                        equationTotal={equationCount}
+                        correctAnswerCount={correctAnswerCount}
+                    />
+                </div>
             </main>
             <Footer />
         </>

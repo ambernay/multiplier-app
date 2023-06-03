@@ -10,7 +10,7 @@ function TopFrame() {
 
 function Heading() {
     return (
-        <div className="title-wrapper">
+        <div className="wrapper">
             <h1 className="title-text">Multiplier</h1>
         </div>
     )

@@ -280,7 +280,7 @@ body {
 /* #region - default styles */
 .wrapper {
     max-width: 1080px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -288,6 +288,12 @@ img {
     max-width: 100%;
     width: auto;
     height: 100%;
+}
+
+h2,
+h3 {
+    margin: 0;
+    padding: 10px;
 }
 
 /* #endregion - default styles */
@@ -305,14 +311,23 @@ img {
 
 /* #endregion - variables */
 
-/* #region - text */
+#grid {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "board-top board-top board-top"
+        "board-left board-mid-bottom board-right"
+        "footer footer footer";
+    grid-template-rows: 10vh 20vh 60vh 10vh;
+    grid-template-columns: 30vw 40vw 30vw;
+}
+
 .title-text,
 .work-area,
 .range,
-.timer-section,
+.timer-box,
 button,
-.total,
-fieldset {
+.total {
     text-align: center;
     opacity: 0.8;
     /* #region - font chalk texture */
@@ -326,106 +341,161 @@ fieldset {
 
 .work-area,
 .range,
-button,
-fieldset {
+button {
     font-family: var(--work-area-font);
     font-size: 2vmax;
 }
 
-fieldset {
-    border-style: solid;
-    border-width: 10px;
-}
-
-.timer-section {
-    font-size: 4vmin;
-    font-family: var(--work-area-font);
-}
-
-/* #endregion - text */
-
 body {
-    height: 100vh;
-    background: url("./images/textures/chalkboard_texture_wgrain.png") no-repeat, var(--background-green);
-    background-size: cover;
-    background-position-x: center;
-    opacity: 0.8;
-}
-
-/* #region - header and footer */
-/* head and foot wood texture */
-header,
-footer {
-    height: 65px;
-    width: 100%;
-}
-
-header {
-    background: var(--header-gradient);
-}
-
-.wood {
-    width: 100%;
+    background-color: var(--background-green);
     height: 100%;
+    margin: 0;
+}
+
+/* background chalkboard texture */
+.texture {
+    height: 100vmax;
+    opacity: 0.7;
+}
+
+/* head and foot wood texture */
+.wood-grain {
+    width: 100%;
+    height: inherit;
     opacity: 0.3;
+    background-image: url("./images/textures/long_wood_grain.png");
     mix-blend-mode: soft-light;
 }
 
-.top-frame {
-    background: url("./images/textures/long_wood_grain.png"), var(--header-gradient);
-    background-position-y: bottom;
-}
-
-footer {
-    background: var(--footer-gradient);
-}
-
-.bottom-frame {
-    background: url("./images/textures/long_wood_grain.png");
+/* #region - heading  */
+/* chalk title */
+.title-wrapper {
+    display: grid;
+    grid-area: board-top;
+    width: max-content;
+    justify-self: center;
 }
 
 .title-text {
     font-family: var(--title-font);
     font-size: 10vh;
-    /* margin: 1vh; */
+    margin: 1vh;
     padding: 0 25px;
 }
 
-/* #endregion - header and footer */
-
-/* #region - main */
-main {
-    height: calc(100vh - (65px * 2));
+.top-frame {
+    grid-area: header;
+    display: grid;
+    background: var(--header-gradient);
+    box-shadow: 0 1px 5px 0.2px;
 }
 
-/* #endregion - main */
+.footer .wood-grain {
+    background-position-y: bottom;
+}
+
+.footer {
+    grid-area: footer;
+    background: var(--footer-gradient);
+
+    box-shadow: 0 -1px 5px 0.2px;
+}
+
+.top-frame,
+.footer {
+    height: 100%;
+}
+
+/* #endregion - heading  */
+/* #region - workspace area */
+
+.work-area {
+    grid-area: board-mid-bottom;
+    /* position */
+    display: flex;
+    visibility: hidden;
+    justify-content: center;
+    align-self: center;
+}
+
+.work-area-form {
+    display: grid;
+}
+
+.equation-text {
+    display: grid;
+    align-content: end;
+    line-height: 10vmax;
+}
+
+.answer-input {
+    margin: 10px;
+}
+
+.answer-button {
+    margin: 5px auto;
+}
+
+.mark {
+    display: grid;
+    visibility: hidden;
+    position: absolute;
+    font-size: 10vmin;
+    margin-top: 5vh;
+    margin-left: 20vw;
+}
+
+#checkmark {
+    background: url(./images/textures/green_chalk_texture.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+#x-mark {
+    background: url(./images/textures/red_chalk_texture.png) no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+/* #endregion - workspace area */
 
 /* #region - timer */
-
-.timer-section {
+.timer-box {
+    grid-area: board-right;
     display: flex;
     flex-direction: column;
-    width: 30%;
-    justify-content: center;
+    justify-content: flex-end;
+    font-size: 4vmin;
+    font-family: var(--work-area-font);
 }
 
-.apple-container {
+.apple-wrapper {
     display: flex;
-    background: url("./images/chalk_apple.png") no-repeat;
+    background: url('./images/chalk_apple.png') no-repeat;
     background-size: contain;
     background-position-x: center;
-    width: 100%;
     justify-content: center;
-}
-
-.timer-text {
-    margin: 0
+    align-items: center;
+    height: 50%;
+    width: 100%;
 }
 
 /* #endregion - timer */
 
+/* #region - range selection */
+.range {
+    grid-area: board-left;
+    transform: skew(-1deg, -15deg);
+    margin: 5vh 1vw;
+}
 
-/* #region - range */
+.form-label {
+    margin: 0;
+}
 
 .selection {
     display: flex;
@@ -449,8 +519,11 @@ main {
     outline: none;
 }
 
+.to {
+    padding: 0 15px;
+}
+
 button {
-    background: none;
     border: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     padding: 5px 5px 0 5px;
@@ -460,4 +533,4 @@ button:hover {
     text-shadow: 0 0 20px hsla(0, 0%, 100%, 0.7);
 }
 
-/* #endregion - range */
+/* #endregion - range selection */

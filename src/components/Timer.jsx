@@ -1,5 +1,5 @@
 import React from "react";
-// import Apple from "./public/images/chalk_apple.png";
+import Apple from "../images/chalk_apple.png";
 
 function Timer(props) {
 
@@ -7,10 +7,9 @@ function Timer(props) {
     const correctAnswerTotal = props.correctAnswerCount
 
     return (
-        <section className="timer-section">
+        <section className="timer-box">
             <h3 className="timer-text">Timer</h3>
-            <div className="apple-container">
-                {/* <img className="apple" src="../images/chalk_apple.png" alt="chalk apple" /> */}
+            <div className="apple-wrapper">
                 <h3 className="total">{correctAnswerTotal}/{equationTotal}</h3>
             </div>
         </section>

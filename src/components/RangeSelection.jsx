@@ -3,22 +3,17 @@ import React from "react";
 function RangeSelection(props) {
 
     return (
-        <section className="range">
+        <div className="range">
+            <h3 className="form-label">Choose Table Range:</h3>
             <form onSubmit={props.handleSubmitRange}>
-                <fieldset className="selection">
-                    <legend>Choose Table Range:</legend>
-
-                    <label className="sr-only" for="start-range"></label>
-                    <input id="start-range" className="input" type="text" size="2" maxLength={2} onSubmit={e => { props.getFirstNum(e) }} />
-
+                <div className="selection">
+                    <input className="input start-range" type="text" size="2" maxLength={2} onSubmit={e => {props.getFirstNum(e)}}/>
                     <p className="to">to</p>
-
-                    <label className="sr-only" for="end-range"></label>
-                    <input id="end-range" className="input" type="text" size="2" maxLength={2} onSubmit={e => { props.getSecondNum(e) }} />
-                </fieldset>
+                    <input className="input end-range" type="text" size="2" maxLength={2} onSubmit={e => {props.getSecondNum(e)}}/>
+                </div>
                 <button>Make Table</button>
-            </form>
-        </section>
+            </form>  
+        </div>
     )
 }
 

@@ -33,30 +33,24 @@ function App() {
     // }
 
     return (
-        <>
-            <header>
-                <TopFrame />
-                <Heading />
-            </header>
-            <main>
-                <div className="wrapper">
-                    <WorkArea
-                        firstNumSelection={firstNum}
-                        secondNumSelection={secondNum}
-                        equationCounter={(e) => { setEquationCount(equationCount + 1) }}
-                        correctAnswerCount={(e) => { setCorrectAnswerCount(correctAnswerCount + 1) }}
-                    />
-                    <RangeSelection
-                        handleSubmitRange={handleSubmitRange}
-                    />
-                    <Timer
-                        equationTotal={equationCount}
-                        correctAnswerCount={correctAnswerCount}
-                    />
-                </div>
-            </main>
+        <div id="grid">
+            <TopFrame />
+            <Heading />
+            <WorkArea
+                firstNumSelection={firstNum}
+                secondNumSelection={secondNum}
+                equationCounter={(e) => { setEquationCount(equationCount + 1) }}
+                correctAnswerCount={(e) => { setCorrectAnswerCount(correctAnswerCount + 1) }}
+            />
+            <RangeSelection
+                handleSubmitRange={handleSubmitRange}
+            />
+            <Timer
+                equationTotal={equationCount}
+                correctAnswerCount={correctAnswerCount}
+            />
             <Footer />
-        </>
+        </div>
     )
 }
 

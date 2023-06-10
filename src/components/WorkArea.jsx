@@ -32,7 +32,7 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
         else {
             workArea.style.visibility = "visible";
         }
-    }, [minNum.current, maxNum.current])
+    }, [])
     // #endregion set visibility for work area
 
     // #region answer validation

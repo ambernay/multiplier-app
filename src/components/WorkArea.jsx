@@ -18,7 +18,7 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
         setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
         setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
 
-    }, [firstNumSelection, secondNumSelection, maxNum.current, minNum.current]);
+    }, [firstNumSelection, secondNumSelection]);
     // #endregion set equation
 
     // #region set visibility for work area

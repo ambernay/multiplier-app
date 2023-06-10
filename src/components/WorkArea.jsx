@@ -93,7 +93,7 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
     // #endregion handle submit
 
     return (
-        <div className="work-area" onVisibilityChange={console.log('changed')} >
+        <div className="work-area">
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
                 <h2 className="equation-text">{firstNum} x {secondNum} =
                     <input className="input answer-input" type="text" size="4" maxLength={4} />

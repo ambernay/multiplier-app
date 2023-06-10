@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TopFrame, Heading } from "./Heading";
 import WorkArea from "./WorkArea";
 import RangeSelection from "./RangeSelection";
-import Timer from "./Timer";
+import Counter from "./Counter";
 import Footer from "./Footer";
 
 function App() {
@@ -13,14 +13,7 @@ function App() {
     const [equationCount, setEquationCount] = useState(0);
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
 
-    const handleSubmitRange = (e) => {
-        e.preventDefault();
-        const firstInput = document.querySelector(".start-range").value;
-        const secondInput = document.querySelector(".end-range").value;
-        setFirstNum(firstInput);
-        setSecondNum(secondInput);
-        // makeEquationArr(firstInput, secondInput);
-    };
+
 
     // function makeEquationArr(firstInput, secondInput) {
     //     const equationArr = [];
@@ -39,13 +32,19 @@ function App() {
             <WorkArea
                 firstNumSelection={firstNum}
                 secondNumSelection={secondNum}
-                equationCounter={(e) => { setEquationCount(equationCount + 1) }}
-                correctAnswerCount={(e) => { setCorrectAnswerCount(correctAnswerCount + 1) }}
+                equationCount={equationCount}
+                setEquationCount={setEquationCount}
+                correctAnswerCount={correctAnswerCount}
+                setCorrectAnswerCount={setCorrectAnswerCount}
             />
             <RangeSelection
-                handleSubmitRange={handleSubmitRange}
+                setFirstNum={setFirstNum}
+                setSecondNum={setSecondNum}
+                // back to zero when setting a new range
+                setEquationCount={setEquationCount}
+                setCorrectAnswerCount={setCorrectAnswerCount}
             />
-            <Timer
+            <Counter
                 equationTotal={equationCount}
                 correctAnswerCount={correctAnswerCount}
             />

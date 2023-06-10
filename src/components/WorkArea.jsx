@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function WorkArea(props) {
-    
+function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount }) {
+
     const [buttonText, setButtonText] = useState("Submit");
     // #region set equation
     const minNum = useRef();
@@ -12,33 +12,31 @@ function WorkArea(props) {
     const equationArr = [];
 
     useEffect(() => {
-        minNum.current = parseInt(props.firstNumSelection < props.secondNumSelection ? props.firstNumSelection : props.secondNumSelection);
-        maxNum.current = parseInt(props.firstNumSelection < props.secondNumSelection ? props.secondNumSelection : props.firstNumSelection);
-        
-        setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
-        setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
+        minNum.current = parseInt(firstNumSelection < secondNumSelection ? firstNumSelection : secondNumSelection);
+        maxNum.current = parseInt(firstNumSelection < secondNumSelection ? secondNumSelection : firstNumSelection);
 
-    }, [props.firstNumSelection, props.secondNumSelection, maxNum.current, minNum.current]);
+        setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
+        setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
+
+    }, [firstNumSelection, secondNumSelection, maxNum.current, minNum.current]);
     // #endregion set equation
-    
+
     // #region set visibility for work area
     useEffect(() => {
 
         const workArea = document.querySelector(".work-area");
 
-        if(Number.isNaN(minNum.current) || Number.isNaN(maxNum.current)){
+        if (Number.isNaN(minNum.current) || Number.isNaN(maxNum.current)) {
             workArea.style.visibility = "hidden";
-            console.log(workArea.style.visibility);
         }
-        else{
+        else {
             workArea.style.visibility = "visible";
-            console.log(workArea.style.visibility);
         }
     }, [minNum.current, maxNum.current])
     // #endregion set visibility for work area
-    
+
     // #region answer validation
-    
+
     const correctAnswer = firstNum * secondNum;
     // answer validation mark
     const [mark, setMark] = useState('✗');
@@ -47,16 +45,16 @@ function WorkArea(props) {
     // #endregion answer validation
 
     // #region equation counter - on button click
-    function getEquationCount(e){
+    function getEquationCount(e) {
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
         // add to total counter on submit
-        if (buttonText==="Submit") {
-            props.equationCounter(e);
+        if (buttonText === "Submit") {
+            setEquationCount(equationCount + 1);
             // add to correct counter only when correct
             if (userAnswer === correctAnswer) {
-                props.correctAnswerCount(e);
+                setCorrectAnswerCount(correctAnswerCount + 1);
             }
-        } 
+        }
     }
     // #endregion equation counter - on button click
 
@@ -66,7 +64,7 @@ function WorkArea(props) {
         // #region check answer and mark answer
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
 
-        if(userAnswer === correctAnswer) {
+        if (userAnswer === correctAnswer) {
             setMark('✔︎');
             setMarkId('checkmark');
         }
@@ -76,15 +74,15 @@ function WorkArea(props) {
         }
         // #endregion check answer and mark answer
         // #region change button and checkmark visibility
-        if(buttonText === "Submit") {
+        if (buttonText === "Submit") {
             setButtonText("Next");
-            // show x or check mark 
+            // show x or check mark
             markVisibility.style.visibility = "visible";
         }
-        else if(buttonText === "Next") {
+        else if (buttonText === "Next") {
             setButtonText("Submit");
-            setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
-            setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
+            setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
+            setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
             // resets input after "Next" button click
             document.querySelector(".answer-input").value = "";
             // hide x and check mark
@@ -94,14 +92,14 @@ function WorkArea(props) {
     }
     // #endregion handle submit
 
-    return(
+    return (
         <div className="work-area" onVisibilityChange={console.log('changed')} >
-            <form className="work-area-form"  onSubmit={handleSubmitAnswer}>
+            <form className="work-area-form" onSubmit={handleSubmitAnswer}>
                 <h2 className="equation-text">{firstNum} x {secondNum} =
-                    <input className="input answer-input" type="text" size="4" maxLength={4}/>
+                    <input className="input answer-input" type="text" size="4" maxLength={4} />
                 </h2>
-                <button className="answer-button" 
-                    onClick={(e) => {getEquationCount(e)}}>
+                <button className="answer-button"
+                    onClick={(e) => { getEquationCount(e) }}>
                     {buttonText}
                 </button>
             </form>

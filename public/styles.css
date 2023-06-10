@@ -246,6 +246,7 @@ template {
 
 html {
     box-sizing: border-box;
+    font-size: 125%;
 }
 
 *,
@@ -291,7 +292,8 @@ img {
 }
 
 h2,
-h3 {
+h3,
+h4 {
     margin: 0;
     padding: 10px;
 }
@@ -307,6 +309,7 @@ h3 {
     --header-gradient: linear-gradient(hsl(34, 73%, 20%), hsl(34, 72%, 35%));
     --title-font: 'Londrina Outline', cursive;
     --work-area-font: 'Callie Chalk Font', sans-serif;
+    --wood-font: 'Neucha', cursive;
 }
 
 /* #endregion - variables */
@@ -325,7 +328,7 @@ h3 {
 .title-text,
 .work-area,
 .range,
-.timer-box,
+.counter-box,
 button,
 .total {
     text-align: center;
@@ -391,19 +394,31 @@ body {
 }
 
 .footer .wood-grain {
+    display: flex;
     background-position-y: bottom;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer {
     grid-area: footer;
     background: var(--footer-gradient);
-
     box-shadow: 0 -1px 5px 0.2px;
 }
 
 .top-frame,
 .footer {
     height: 100%;
+}
+
+.wood-grain h4 {
+    font-family: var(--wood-font);
+    font-size: 2rem;
+    color: #fff;
+    -webkit-text-stroke: 0.1px #000;
+    text-shadow: 0 0 2px #000;
+    letter-spacing: 0.4rem;
+    transform: skew(-20deg, 0deg);
 }
 
 /* #endregion - heading  */
@@ -463,8 +478,8 @@ body {
 
 /* #endregion - workspace area */
 
-/* #region - timer */
-.timer-box {
+/* #region - counter */
+.counter-box {
     grid-area: board-right;
     display: flex;
     flex-direction: column;
@@ -484,7 +499,7 @@ body {
     width: 100%;
 }
 
-/* #endregion - timer */
+/* #endregion - counter */
 
 /* #region - range selection */
 .range {

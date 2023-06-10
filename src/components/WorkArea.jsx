@@ -9,7 +9,7 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
     const [firstNum, setFirstNum] = useState(minNum.current);
     const [secondNum, setSecondNum] = useState(maxNum.current);
     // const [equationArr, setEquationArr] = useState([]);
-    const equationArr = [];
+    // const equationArr = [];
 
     useEffect(() => {
         minNum.current = parseInt(firstNumSelection < secondNumSelection ? firstNumSelection : secondNumSelection);

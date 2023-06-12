@@ -1,42 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
-function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount }) {
+function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, minNum, maxNum }) {
 
-    const [buttonText, setButtonText] = useState("Submit");
-    // #region set equation
-    const minNum = useRef();
-    const maxNum = useRef();
-    const [firstNum, setFirstNum] = useState(minNum.current);
-    const [secondNum, setSecondNum] = useState(maxNum.current);
-    // const [equationArr, setEquationArr] = useState([]);
-    // const equationArr = [];
+    const [buttonState, setbuttonState] = useState("Submit");
 
-    useEffect(() => {
-        minNum.current = parseInt(firstNumSelection < secondNumSelection ? firstNumSelection : secondNumSelection);
-        maxNum.current = parseInt(firstNumSelection < secondNumSelection ? secondNumSelection : firstNumSelection);
-
-        setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
-        setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
-
-    }, [firstNumSelection, secondNumSelection]);
-    // #endregion set equation
-
-    // #region set visibility for work area
-    useEffect(() => {
-
-        const workArea = document.querySelector(".work-area");
-
-        if (Number.isNaN(minNum.current) || Number.isNaN(maxNum.current)) {
-            workArea.style.visibility = "hidden";
-        }
-        else {
-            workArea.style.visibility = "visible";
-        }
-    }, [])
-    // #endregion set visibility for work area
+    const [firstNum, setFirstNum] = useState(0);
+    const [secondNum, setSecondNum] = useState(0);
 
     // #region answer validation
-
     const correctAnswer = firstNum * secondNum;
     // answer validation mark
     const [mark, setMark] = useState('✗');
@@ -44,11 +15,31 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
     const markVisibility = document.querySelector(".mark");
     // #endregion answer validation
 
+    // #region set visibility for work area
+    useEffect(() => {
+        const workArea = document.querySelector(".work-area");
+        console.log(equationList);
+        if (equationList.length < 1) {
+            workArea.style.visibility = "hidden";
+        }
+        else {
+
+            let equationIndex = Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
+
+            setFirstNum(equationList[equationIndex][0]);
+            setSecondNum(equationList[equationIndex][1]);
+
+            workArea.style.visibility = "visible";
+        }
+    }, [minNum, maxNum, equationList]);
+
+    // #endregion set visibility for work area
+
     // #region equation counter - on button click
-    function getEquationCount(e) {
+    function getEquationCount() {
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
         // add to total counter on submit
-        if (buttonText === "Submit") {
+        if (buttonState === "Submit") {
             setEquationCount(equationCount + 1);
             // add to correct counter only when correct
             if (userAnswer === correctAnswer) {
@@ -74,15 +65,14 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
         }
         // #endregion check answer and mark answer
         // #region change button and checkmark visibility
-        if (buttonText === "Submit") {
-            setButtonText("Next");
+        if (buttonState === "Submit") {
+            setbuttonState("Next");
             // show x or check mark
             markVisibility.style.visibility = "visible";
         }
-        else if (buttonText === "Next") {
-            setButtonText("Submit");
-            setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
-            setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current + 1) + minNum.current));
+        else if (buttonState === "Next") {
+            setbuttonState("Submit");
+
             // resets input after "Next" button click
             document.querySelector(".answer-input").value = "";
             // hide x and check mark
@@ -100,7 +90,7 @@ function WorkArea({ firstNumSelection, secondNumSelection, equationCount, setEqu
                 </h2>
                 <button className="answer-button"
                     onClick={(e) => { getEquationCount(e) }}>
-                    {buttonText}
+                    {buttonState}
                 </button>
             </form>
             <div id={markId} className="mark">{mark}</div>

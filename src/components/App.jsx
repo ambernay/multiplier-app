@@ -7,42 +7,36 @@ import Footer from "./Footer";
 
 function App() {
 
-    const [firstNum, setFirstNum] = useState();
-    const [secondNum, setSecondNum] = useState();
+    const [minNum, setMinNum] = useState();
+    const [maxNum, setMaxNum] = useState();
 
     const [equationCount, setEquationCount] = useState(0);
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
 
-
-
-    // function makeEquationArr(firstInput, secondInput) {
-    //     const equationArr = [];
-    //     console.log(firstInput, secondInput)
-    //     for (firstInput; firstInput < secondInput; firstNum+1){
-    //         let newArr = [];
-    //         newArr.push(firstNum);
-    //         console.log(newArr);
-    //     }
-    // }
+    const [equationList, setEquationList] = useState([]);
 
     return (
         <div id="grid">
             <TopFrame />
             <Heading />
             <WorkArea
-                firstNumSelection={firstNum}
-                secondNumSelection={secondNum}
+                minNum={minNum}
+                maxNum={maxNum}
                 equationCount={equationCount}
                 setEquationCount={setEquationCount}
                 correctAnswerCount={correctAnswerCount}
                 setCorrectAnswerCount={setCorrectAnswerCount}
+                equationList={equationList}
             />
             <RangeSelection
-                setFirstNum={setFirstNum}
-                setSecondNum={setSecondNum}
+                minNum={minNum}
+                setMinNum={setMinNum}
+                maxNum={maxNum}
+                setMaxNum={setMaxNum}
                 // back to zero when setting a new range
                 setEquationCount={setEquationCount}
                 setCorrectAnswerCount={setCorrectAnswerCount}
+                setEquationList={setEquationList}
             />
             <Counter
                 equationTotal={equationCount}

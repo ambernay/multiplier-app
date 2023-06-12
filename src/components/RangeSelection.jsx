@@ -1,17 +1,38 @@
 import React from "react";
+// import React, { useState } from "react";
 
-function RangeSelection({ setFirstNum, setSecondNum, setEquationCount, setCorrectAnswerCount }) {
+function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount, setCorrectAnswerCount, setEquationList }) {
+
 
     const handleSubmitRange = (e) => {
         e.preventDefault();
-        const firstInput = document.querySelector(".start-range").value;
-        const secondInput = document.querySelector(".end-range").value;
-        setFirstNum(firstInput);
-        setSecondNum(secondInput);
+        const firstInput = parseInt(document.querySelector(".start-range").value);
+        const secondInput = parseInt(document.querySelector(".end-range").value);
+
+        // set minimum range to the lowest number
+        firstInput < secondInput ? setMinNum(firstInput) : setMinNum(secondInput);
+        // set max range to highest number
+        firstInput < secondInput ? setMaxNum(secondInput) : setMaxNum(firstInput)
+
         setEquationCount(0);
         setCorrectAnswerCount(0);
-        // makeEquationArr(firstInput, secondInput);
+
+        makeEquationList()
     };
+
+
+    const makeEquationList = () => {
+        const equationArr = [];
+
+        for (let x = minNum; x <= maxNum; x++) {
+            for (let y = minNum; y <= maxNum; y++) {
+                let equation = [];
+                equation.push(x, y);
+                equationArr.push(equation);
+            }
+            setEquationList(equationArr);
+        }
+    }
 
     return (
         <div className="range">

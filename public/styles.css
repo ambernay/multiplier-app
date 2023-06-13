@@ -428,7 +428,6 @@ body {
     grid-area: board-mid-bottom;
     /* position */
     display: flex;
-    visibility: hidden;
     justify-content: center;
     align-self: center;
 }

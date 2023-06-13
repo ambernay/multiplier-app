@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, minNum, maxNum }) {
+function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
 
     const [buttonState, setbuttonState] = useState("Submit");
 
-    const [firstNum, setFirstNum] = useState(0);
-    const [secondNum, setSecondNum] = useState(0);
+    // const [firstNum, setFirstNum] = useState(0);
+    // const [secondNum, setSecondNum] = useState(0);
+
+    let firstNum = equationList[equationIndex][0];
+    let secondNum = equationList[equationIndex][1];
 
     // #region answer validation
     const correctAnswer = firstNum * secondNum;
@@ -14,26 +17,6 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
     const [markId, setMarkId] = useState('');
     const markVisibility = document.querySelector(".mark");
     // #endregion answer validation
-
-    // #region set visibility for work area
-    useEffect(() => {
-        const workArea = document.querySelector(".work-area");
-        console.log(equationList);
-        if (equationList.length < 1) {
-            workArea.style.visibility = "hidden";
-        }
-        else {
-
-            let equationIndex = Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
-
-            setFirstNum(equationList[equationIndex][0]);
-            setSecondNum(equationList[equationIndex][1]);
-
-            workArea.style.visibility = "visible";
-        }
-    }, [minNum, maxNum, equationList]);
-
-    // #endregion set visibility for work area
 
     // #region equation counter - on button click
     function getEquationCount() {
@@ -71,6 +54,11 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
             markVisibility.style.visibility = "visible";
         }
         else if (buttonState === "Next") {
+            // setEquationList(equationList.filter(equation => equation[equationIndex] !== equationIndex));
+            setEquationIndex(Math.floor((Math.random() * equationList.length)));
+            console.log(equationIndex, firstNum, secondNum);
+            // setFirstNum(equationList[equationIndex][0]);
+            // setSecondNum(equationList[equationIndex][1]);
             setbuttonState("Submit");
 
             // resets input after "Next" button click

@@ -32,28 +32,38 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
     // #region handle submit
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
-        // #region check answer and mark answer
-        const userAnswer = parseInt(document.querySelector(".answer-input").value);
 
-        if (userAnswer === correctAnswer) {
-            setMark('✔︎');
-            setMarkId('checkmark');
-        }
-        else {
-            setMark('✗');
-            setMarkId('x-mark');
-        }
-        // #endregion check answer and mark answer
         // #region change button and checkmark visibility
         if (buttonState === "Submit") {
-            setbuttonState("Next");
+
+            // #region check answer and mark answer
+            const userAnswer = parseInt(document.querySelector(".answer-input").value);
+
+            if (userAnswer === correctAnswer) {
+                setMark('✔︎');
+                setMarkId('checkmark');
+            }
+            else {
+                setMark('✗');
+                setMarkId('x-mark');
+            }
             // show x or check mark
             markVisibility.style.visibility = "visible";
+            // #endregion check answer and mark answer
+            setbuttonState("Next");
         }
         else if (buttonState === "Next") {
-            // setEquationList(equationList.filter(equation => equation[equationIndex] !== equationIndex));
-            setEquationIndex(Math.floor((Math.random() * equationList.length)));
-            setbuttonState("Submit");
+            if (equationList.length > 0) {
+                console.log(equationList, equationIndex);
+                setEquationList(equationList.filter(equation => equation !== equationList[equationIndex]));
+                console.log(equationList, equationIndex);
+                setEquationIndex(Math.floor((Math.random() * equationList.length)));
+                setbuttonState("Submit");
+            }
+            else {
+                console.log('no numbers');
+            }
+
 
             // resets input after "Next" button click
             document.querySelector(".answer-input").value = "";
@@ -69,7 +79,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
                 <h2 className="equation-text">{firstNum} x {secondNum} =
                     <label className='sr-only' htmlFor='user-answer'>your answer</label>
-                    <input id='user-answer' className="input answer-input" type="text" size="4" maxLength={4} />
+                    <input id='user-answer' className="input answer-input" type="text" size="4" maxLength={4} autoComplete="off" />
                 </h2>
                 <button className="answer-button"
                     onClick={(e) => { getEquationCount(e) }}>

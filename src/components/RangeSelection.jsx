@@ -30,7 +30,6 @@ function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount
                 equationArr.push(equation);
             }
         }
-        console.log(equationArr);
         setEquationList(equationArr);
         setEquationIndex(Math.floor((Math.random() * equationArr.length)));
 
@@ -42,12 +41,12 @@ function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount
             <form onSubmit={handleSubmitRange}>
                 <div className="selection">
                     <label className='sr-only' htmlFor='start'>Start Range</label>
-                    <input id='start' className="input start-range" type="text" size="2" maxLength={2} />
+                    <input id='start' className="input start-range" type="text" size="2" maxLength={2} autoComplete="off" />
 
                     <p className="to">to</p>
 
                     <label className='sr-only' htmlFor='end'>End Range</label>
-                    <input id='end' className="input end-range" type="text" size="2" maxLength={2} />
+                    <input id='end' className="input end-range" type="text" size="2" maxLength={2} autoComplete="off" />
                 </div>
                 <button>Make Table</button>
             </form>

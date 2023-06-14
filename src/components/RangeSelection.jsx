@@ -34,19 +34,19 @@ function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount
         setEquationList(equationArr);
         setEquationIndex(Math.floor((Math.random() * equationArr.length)));
 
-    }, [minNum, maxNum, setEquationList]);
+    }, [minNum, maxNum, setEquationList, setEquationIndex]);
 
     return (
         <section className="range">
             <h3 className="form-label">Choose Table Range:</h3>
             <form onSubmit={handleSubmitRange}>
                 <div className="selection">
-                    <label className='sr-only' for='start'>Start Range</label>
+                    <label className='sr-only' htmlFor='start'>Start Range</label>
                     <input id='start' className="input start-range" type="text" size="2" maxLength={2} />
 
                     <p className="to">to</p>
 
-                    <label className='sr-only' for='end'>End Range</label>
+                    <label className='sr-only' htmlFor='end'>End Range</label>
                     <input id='end' className="input end-range" type="text" size="2" maxLength={2} />
                 </div>
                 <button>Make Table</button>

@@ -4,9 +4,6 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
 
     const [buttonState, setbuttonState] = useState("Submit");
 
-    // const [firstNum, setFirstNum] = useState(0);
-    // const [secondNum, setSecondNum] = useState(0);
-
     let firstNum = equationList[equationIndex][0];
     let secondNum = equationList[equationIndex][1];
 
@@ -56,9 +53,6 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
         else if (buttonState === "Next") {
             // setEquationList(equationList.filter(equation => equation[equationIndex] !== equationIndex));
             setEquationIndex(Math.floor((Math.random() * equationList.length)));
-            console.log(equationIndex, firstNum, secondNum);
-            // setFirstNum(equationList[equationIndex][0]);
-            // setSecondNum(equationList[equationIndex][1]);
             setbuttonState("Submit");
 
             // resets input after "Next" button click
@@ -74,7 +68,8 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
         <div className="work-area">
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
                 <h2 className="equation-text">{firstNum} x {secondNum} =
-                    <input className="input answer-input" type="text" size="4" maxLength={4} />
+                    <label className='sr-only' htmlFor='user-answer'>your answer</label>
+                    <input id='user-answer' className="input answer-input" type="text" size="4" maxLength={4} />
                 </h2>
                 <button className="answer-button"
                     onClick={(e) => { getEquationCount(e) }}>

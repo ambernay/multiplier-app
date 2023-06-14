@@ -37,17 +37,21 @@ function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount
     }, [minNum, maxNum, setEquationList]);
 
     return (
-        <div className="range">
+        <section className="range">
             <h3 className="form-label">Choose Table Range:</h3>
             <form onSubmit={handleSubmitRange}>
                 <div className="selection">
-                    <input className="input start-range" type="text" size="2" maxLength={2} />
+                    <label className='sr-only' for='start'>Start Range</label>
+                    <input id='start' className="input start-range" type="text" size="2" maxLength={2} />
+
                     <p className="to">to</p>
-                    <input className="input end-range" type="text" size="2" maxLength={2} />
+
+                    <label className='sr-only' for='end'>End Range</label>
+                    <input id='end' className="input end-range" type="text" size="2" maxLength={2} />
                 </div>
                 <button>Make Table</button>
             </form>
-        </div>
+        </section>
     )
 }
 

@@ -317,12 +317,11 @@ h4 {
 #grid {
     display: grid;
     grid-template-areas:
-        "header header header"
-        "board-top board-top board-top"
-        "board-left board-mid-bottom board-right"
-        "footer footer footer";
-    grid-template-rows: 10vh 20vh 60vh 10vh;
-    grid-template-columns: 30vw 40vw 30vw;
+        "header"
+        "main"
+        "footer";
+    grid-template-rows: 10vh 80vh 10vh;
+    grid-template-columns: 100vw;
 }
 
 .title-text,
@@ -353,6 +352,20 @@ body {
     background-color: var(--background-green);
     height: 100%;
     margin: 0;
+}
+
+main {
+    display: grid;
+    grid-area: main;
+    grid-template-areas:
+        "board-top board-top board-top"
+        "board-left board-mid-bottom board-right";
+    grid-template-rows: 20vh 60vh;
+    grid-template-columns: 30vw 40vw 30vw;
+
+    background: url(./images/textures/chalkboard_texture_wgrain.png) no-repeat;
+    background-size: cover;
+    background-position-y: bottom;
 }
 
 /* background chalkboard texture */
@@ -413,11 +426,13 @@ body {
 
 .wood-grain h4 {
     font-family: var(--wood-font);
-    font-size: 2rem;
+    font-size: 5vmin;
     color: #fff;
     -webkit-text-stroke: 0.1px #000;
-    text-shadow: 0 0 2px #000;
+    text-shadow: 0 0 2px #000, 0 0 6px #000;
+    mix-blend-mode: hard-light;
     letter-spacing: 0.4rem;
+    text-align: center;
     transform: skew(-20deg, 0deg);
 }
 
@@ -540,7 +555,7 @@ body {
 button {
     border: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    padding: 5px 5px 0 5px;
+    padding: 10px 5px 0 5px;
 }
 
 button:hover {

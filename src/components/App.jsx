@@ -14,44 +14,44 @@ function App() {
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
 
     const [equationList, setEquationList] = useState([]);
-    const [equationIndex, setEquationIndex] = useState("fuck you");
-
-    console.log(equationIndex);
+    const [equationIndex, setEquationIndex] = useState();
 
     return (
         <div id="grid">
             <TopFrame />
-            <Heading />
-            {equationList.length > 0 ?
-                <WorkArea
-                    equationCount={equationCount}
+            <main>
+                <Heading />
+                {equationList.length > 0 ?
+                    <WorkArea
+                        equationCount={equationCount}
+                        setEquationCount={setEquationCount}
+                        correctAnswerCount={correctAnswerCount}
+                        setCorrectAnswerCount={setCorrectAnswerCount}
+                        equationList={equationList}
+                        setEquationList={setEquationList}
+                        equationIndex={equationIndex}
+                        setEquationIndex={setEquationIndex}
+                    />
+                    : null
+                }
+                <RangeSelection
+                    minNum={minNum}
+                    setMinNum={setMinNum}
+                    maxNum={maxNum}
+                    setMaxNum={setMaxNum}
+                    // back to zero when setting a new range
                     setEquationCount={setEquationCount}
-                    correctAnswerCount={correctAnswerCount}
                     setCorrectAnswerCount={setCorrectAnswerCount}
                     equationList={equationList}
                     setEquationList={setEquationList}
-                    equationIndex={equationIndex}
                     setEquationIndex={setEquationIndex}
+                    equationIndex={equationIndex}
                 />
-                : null
-            }
-            <RangeSelection
-                minNum={minNum}
-                setMinNum={setMinNum}
-                maxNum={maxNum}
-                setMaxNum={setMaxNum}
-                // back to zero when setting a new range
-                setEquationCount={setEquationCount}
-                setCorrectAnswerCount={setCorrectAnswerCount}
-                equationList={equationList}
-                setEquationList={setEquationList}
-                setEquationIndex={setEquationIndex}
-                equationIndex={equationIndex}
-            />
-            <Counter
-                equationTotal={equationCount}
-                correctAnswerCount={correctAnswerCount}
-            />
+                <Counter
+                    equationTotal={equationCount}
+                    correctAnswerCount={correctAnswerCount}
+                />
+            </main>
             <Footer />
         </div>
     )

@@ -467,7 +467,6 @@ main {
 
 .mark {
     display: grid;
-    visibility: hidden;
     position: absolute;
     font-size: 10vmin;
     margin-top: 5vh;

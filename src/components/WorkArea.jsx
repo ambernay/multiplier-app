@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
 
@@ -12,7 +12,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
     // answer validation mark
     const [mark, setMark] = useState('✗');
     const [markId, setMarkId] = useState('');
-    const markVisibility = document.querySelector(".mark");
+
     // #endregion answer validation
 
     // #region equation counter - on button click
@@ -29,7 +29,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
     }
     // #endregion equation counter - on button click
 
-    const validateAnswer = () => {
+    const markAnswer = () => {
         // check answer and mark answer
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
 
@@ -50,11 +50,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
         // #region change button and checkmark visibility
         if (buttonState === "Submit") {
             // check answer and mark answer
-            validateAnswer();
-            // show x or check mark
-            markVisibility.style.visibility = "visible";
-            // #endregion check answer and mark answer
-
+            markAnswer();
             setbuttonState("Next");
         }
         else if (buttonState === "Next") {
@@ -73,8 +69,6 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
             }
             // resets input after "Next" button click
             document.querySelector(".answer-input").value = "";
-            // hide x and check mark
-            markVisibility.style.visibility = "hidden";
         }
     }
     // #endregion handle submit
@@ -91,7 +85,10 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
                     {buttonState}
                 </button>
             </form>
-            <div id={markId} className="mark">{mark}</div>
+            {buttonState === "Next" ?
+                <div id={markId} className="mark">{mark}</div>
+                : <></>
+            }
         </section>
     )
 }

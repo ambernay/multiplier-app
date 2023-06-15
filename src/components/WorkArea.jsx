@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
 
@@ -29,53 +29,58 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
     }
     // #endregion equation counter - on button click
 
+    const validateAnswer = () => {
+        // check answer and mark answer
+        const userAnswer = parseInt(document.querySelector(".answer-input").value);
+
+        if (userAnswer === correctAnswer) {
+            setMark('✔︎');
+            setMarkId('checkmark');
+        }
+        else {
+            setMark('✗');
+            setMarkId('x-mark');
+        }
+    }
+
     // #region handle submit
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
 
         // #region change button and checkmark visibility
         if (buttonState === "Submit") {
-
-            // #region check answer and mark answer
-            const userAnswer = parseInt(document.querySelector(".answer-input").value);
-
-            if (userAnswer === correctAnswer) {
-                setMark('✔︎');
-                setMarkId('checkmark');
-            }
-            else {
-                setMark('✗');
-                setMarkId('x-mark');
-            }
+            // check answer and mark answer
+            validateAnswer();
             // show x or check mark
             markVisibility.style.visibility = "visible";
             // #endregion check answer and mark answer
+
             setbuttonState("Next");
         }
         else if (buttonState === "Next") {
+
             if (equationList.length > 0) {
-                console.log(equationList, equationIndex);
+
+                // remove current equation from list
                 setEquationList(equationList.filter(equation => equation !== equationList[equationIndex]));
-                console.log(equationList, equationIndex);
-                setEquationIndex(Math.floor((Math.random() * equationList.length)));
+
+                // get new equation
+                setEquationIndex(Math.floor((Math.random() * (equationList.length - 1))));
                 setbuttonState("Submit");
             }
             else {
                 console.log('no numbers');
             }
-
-
             // resets input after "Next" button click
             document.querySelector(".answer-input").value = "";
             // hide x and check mark
             markVisibility.style.visibility = "hidden";
         }
-        // #endregion change button and checkmark visibility
     }
     // #endregion handle submit
 
     return (
-        <div className="work-area">
+        <section className="work-area">
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
                 <h2 className="equation-text">{firstNum} x {secondNum} =
                     <label className='sr-only' htmlFor='user-answer'>your answer</label>
@@ -87,7 +92,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
                 </button>
             </form>
             <div id={markId} className="mark">{mark}</div>
-        </div>
+        </section>
     )
 }
 

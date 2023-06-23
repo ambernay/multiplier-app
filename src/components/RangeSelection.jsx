@@ -41,12 +41,12 @@ function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount
             <form onSubmit={handleSubmitRange}>
                 <div className="selection">
                     <label className='sr-only' htmlFor='start'>Start Range</label>
-                    <input id='start' className="input start-range" type="text" size="2" maxLength={2} autoComplete="off" />
+                    <input id='start' className="input start-range" onFocus={(e) => e.target.select()} type="text" size="2" maxLength={2} autoComplete="off" />
 
                     <p className="to">to</p>
 
                     <label className='sr-only' htmlFor='end'>End Range</label>
-                    <input id='end' className="input end-range" type="text" size="2" maxLength={2} autoComplete="off" />
+                    <input id='end' className="input end-range" onFocus={(e) => e.target.select()} type="text" size="2" maxLength={2} autoComplete="off" />
                 </div>
                 <button>Make Table</button>
             </form>

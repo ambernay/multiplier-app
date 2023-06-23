@@ -49,6 +49,8 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
 
         // #region change button and checkmark visibility
         if (buttonState === "Submit") {
+            // removes input focus on submit
+            document.querySelector('#user-answer').blur();
             // check answer and mark answer
             markAnswer();
             setbuttonState("Next");
@@ -56,7 +58,8 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
         else if (buttonState === "Next") {
 
             if (equationList.length > 0) {
-
+                // puts focus on input
+                document.querySelector('#user-answer').focus();
                 // remove current equation from list
                 setEquationList(equationList.filter(equation => equation !== equationList[equationIndex]));
 

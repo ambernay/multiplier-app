@@ -1,7 +1,7 @@
 // import React from "react";
 import React, { useEffect } from "react";
 
-function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount, setCorrectAnswerCount, equationList, setEquationList, setEquationIndex, equationIndex }) {
+function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount, setCorrectAnswerCount, setEquationList, setEquationIndex }) {
 
 
     const handleSubmitRange = (e) => {

@@ -327,6 +327,7 @@ h4 {
 .title-text,
 .work-area,
 .range,
+.input,
 .counter-box,
 button,
 .total {
@@ -336,7 +337,7 @@ button,
     background: url(./images/textures/white_chalk_texture.png) no-repeat center center;
     background-size: cover;
     color: #fff;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #ffffff1a;
     -webkit-background-clip: text;
     /* #endregion - font chalk texture */
 }
@@ -523,6 +524,7 @@ main {
 
 .form-label {
     margin: 0;
+    line-height: 1.8rem;
 }
 
 .selection {
@@ -536,10 +538,9 @@ main {
     background-color: transparent;
     border-style: none;
     border-bottom: 3px solid var(--chalk-text);
-    /* width: 4vmax; */
-    height: 4vmax;
+    height: 2.6rem;
     font-family: var(--work-area-font);
-    font-size: 3vmax;
+    font-size: 1.5rem;
     text-align: center;
     padding: 2px 4px;
     caret-color: var(--chalk-text);

@@ -1,7 +1,7 @@
 // import React from "react";
 import React, { useEffect } from "react";
 
-function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount, setCorrectAnswerCount, setEquationList, setEquationIndex }) {
+function RangeSelection({ setTestIsActive, minNum, maxNum, setMinNum, setMaxNum, setEquationCount, setCorrectAnswerCount, setEquationList, setEquationIndex }) {
 
 
     const handleSubmitRange = (e) => {
@@ -30,10 +30,11 @@ function RangeSelection({ minNum, maxNum, setMinNum, setMaxNum, setEquationCount
                 equationArr.push(equation);
             }
         }
+        // setTestIsActive(true);
         setEquationList(equationArr);
         setEquationIndex(Math.floor((Math.random() * equationArr.length)));
 
-    }, [minNum, maxNum, setEquationList, setEquationIndex]);
+    }, [setTestIsActive, minNum, maxNum, setEquationList, setEquationIndex]);
 
     return (
         <section className="range">

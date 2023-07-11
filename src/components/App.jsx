@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { TopFrame, Heading } from "./Heading";
 import WorkArea from "./WorkArea";
+import Restest from './Retest';
 import RangeSelection from "./RangeSelection";
 import Counter from "./Counter";
 import Footer from "./Footer";
 
 function App() {
+
+    const [testIsActive, setTestIsActive] = useState(false);
 
     const [minNum, setMinNum] = useState();
     const [maxNum, setMaxNum] = useState();
@@ -32,7 +35,7 @@ function App() {
                         equationIndex={equationIndex}
                         setEquationIndex={setEquationIndex}
                     />
-                    : null
+                    : <Restest />
                 }
                 <RangeSelection
                     minNum={minNum}

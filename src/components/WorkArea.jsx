@@ -28,6 +28,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
         }
     }
     // #endregion equation counter - on button click
+    const [wrongAnswers, setWrongAnswers] = useState([]);
 
     const markAnswer = () => {
         // check answer and mark answer
@@ -36,10 +37,17 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
         if (userAnswer === correctAnswer) {
             setMark('✔︎');
             setMarkId('checkmark');
+
+            // setWrongAnswers(wrongAnswers.filter(equation => equation !== equationList[equationIndex]));
+            // console.log(wrongAnswers);
         }
         else {
             setMark('✗');
             setMarkId('x-mark');
+            let wrongAnswer = [firstNum, secondNum];
+            setWrongAnswers((prev) => [...prev, wrongAnswer]);
+            console.log(wrongAnswer);
+            console.log(wrongAnswers);
         }
     }
 

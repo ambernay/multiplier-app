@@ -326,6 +326,7 @@ h4 {
 
 .title-text,
 .work-area,
+.retest-section,
 .range,
 .input,
 .counter-box,
@@ -337,12 +338,13 @@ button,
     background: url(./images/textures/white_chalk_texture.png) no-repeat center center;
     background-size: cover;
     color: #fff;
-    -webkit-text-fill-color: #ffffff1a;
+    -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     /* #endregion - font chalk texture */
 }
 
 .work-area,
+.retest-section,
 .range,
 button {
     font-family: var(--work-area-font);
@@ -543,6 +545,7 @@ main {
     font-size: 1.5rem;
     text-align: center;
     padding: 2px 4px;
+    margin: 10px 0 25px 0;
     caret-color: var(--chalk-text);
     /* removes default focus style */
     outline: none;
@@ -552,10 +555,11 @@ main {
     padding: 0 15px;
 }
 
-button {
+button,
+.retest-title {
     border: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    padding: 10px 5px 0 5px;
+    padding: 15px 10px 5px 10px;
 }
 
 button:hover {
@@ -563,3 +567,55 @@ button:hover {
 }
 
 /* #endregion - range selection */
+
+/* #region retest */
+.retest-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10%;
+}
+
+.retest-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.retest-title {
+    width: fit-content;
+    height: fit-content;
+}
+
+ul {
+    display: flex;
+    visibility: hidden;
+    list-style-type: none;
+    flex-direction: column;
+    row-gap: 12px;
+    padding: 0;
+}
+
+.retest-section:hover ul {
+    visibility: visible;
+}
+
+li {
+    text-align: start;
+}
+
+/* li:hover::before {
+    content: '✔︎';
+    color: #bcdf8a;
+    -webkit-text-fill-color: #97ce4b73;
+} */
+
+li:hover::before {
+    content: '✔︎';
+    color: #bcdf8a;
+    -webkit-text-fill-color: #97ce4b73;
+    padding: 15px;
+    font-size: 1.5rem;
+}
+
+/* #endregion retest */

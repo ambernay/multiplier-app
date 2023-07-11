@@ -49,7 +49,7 @@ function RangeSelection({ setTestIsActive, minNum, maxNum, setMinNum, setMaxNum,
                     <label className='sr-only' htmlFor='end'>End Range</label>
                     <input id='end' className="input end-range" onFocus={(e) => e.target.select()} type="text" size="2" maxLength={2} autoComplete="off" />
                 </div>
-                <button>Make Table</button>
+                <button className="button">Make Table</button>
             </form>
         </section>
     )

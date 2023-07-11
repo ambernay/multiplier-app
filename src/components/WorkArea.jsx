@@ -92,7 +92,7 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
                     <label className='sr-only' htmlFor='user-answer'>your answer</label>
                     <input id='user-answer' className="input answer-input" type="text" size="4" maxLength={4} autoComplete="off" />
                 </h2>
-                <button className="answer-button"
+                <button className="answer-button button"
                     onClick={(e) => { getEquationCount(e) }}>
                     {buttonState}
                 </button>

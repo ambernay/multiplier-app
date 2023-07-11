@@ -132,7 +132,8 @@ textarea {
 
 button,
 input {
-    overflow: visible
+    overflow: visible;
+    border: none;
 }
 
 button,
@@ -555,7 +556,7 @@ main {
     padding: 0 15px;
 }
 
-button,
+.button,
 .retest-title {
     border: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
@@ -592,8 +593,10 @@ ul {
     visibility: hidden;
     list-style-type: none;
     flex-direction: column;
-    row-gap: 12px;
+    align-items: center;
+    row-gap: 35px;
     padding: 0;
+    margin-top: 40px;
 }
 
 .retest-section:hover ul {
@@ -602,20 +605,32 @@ ul {
 
 li {
     text-align: start;
+
 }
 
-/* li:hover::before {
-    content: '✔︎';
-    color: #bcdf8a;
-    -webkit-text-fill-color: #97ce4b73;
-} */
+li .retest-button {
+    border-bottom: 3px solid transparent;
+    border-radius: 260px / 18px;
+    line-height: 2rem;
+    width: fit-content;
+    padding: 2px 15px;
+}
 
-li:hover::before {
+li:hover .retest-button {
+    border-bottom: 3px solid hsla(170, 35%, 69%, 0.7);
+}
+
+li::before {
+    visibility: hidden;
     content: '✔︎';
     color: #bcdf8a;
     -webkit-text-fill-color: #97ce4b73;
     padding: 15px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+}
+
+li:hover::before {
+    visibility: visible;
 }
 
 /* #endregion retest */

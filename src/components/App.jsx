@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { TopFrame, Heading } from "./Heading";
 import WorkArea from "./WorkArea";
-import Restest from './Retest';
+import Retest from './Retest';
 import RangeSelection from "./RangeSelection";
 import Counter from "./Counter";
 import Footer from "./Footer";
 
 function App() {
 
-    const [testIsActive, setTestIsActive] = useState(false);
+    const [testState, setTestState] = useState("initial");
 
-    const [minNum, setMinNum] = useState();
-    const [maxNum, setMaxNum] = useState();
+    const [inputValues, setInputValues] = useState({ first: '', last: '', answerInput: '' });
+
+    const getHandler = (name) => {
+        return (e) => {
+            setInputValues({ ...inputValues, [name]: e.target.value });
+        }
+    }
 
     const [equationCount, setEquationCount] = useState(0);
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
@@ -24,8 +29,12 @@ function App() {
             <TopFrame />
             <main>
                 <Heading />
-                {equationList.length > 0 ?
+                {testState === "active" ?
                     <WorkArea
+                        setTestState={setTestState}
+                        getHandler={getHandler}
+                        inputValues={inputValues}
+                        setInputValues={setInputValues}
                         equationCount={equationCount}
                         setEquationCount={setEquationCount}
                         correctAnswerCount={correctAnswerCount}
@@ -35,13 +44,14 @@ function App() {
                         equationIndex={equationIndex}
                         setEquationIndex={setEquationIndex}
                     />
-                    : <Restest />
+                    : testState === "retest" ? <Retest />
+                        : null
                 }
                 <RangeSelection
-                    minNum={minNum}
-                    setMinNum={setMinNum}
-                    maxNum={maxNum}
-                    setMaxNum={setMaxNum}
+                    setTestState={setTestState}
+                    getHandler={getHandler}
+                    inputValues={inputValues}
+                    setInputValues={setInputValues}
                     // back to zero when setting a new range
                     setEquationCount={setEquationCount}
                     setCorrectAnswerCount={setCorrectAnswerCount}

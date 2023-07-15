@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
+function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
 
-    const [buttonState, setbuttonState] = useState("Submit");
+    const [answerComplete, setAnswerComplete] = useState(false);
 
     let firstNum = equationList[equationIndex][0];
     let secondNum = equationList[equationIndex][1];
@@ -19,12 +19,10 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
     function getEquationCount() {
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
         // add to total counter on submit
-        if (buttonState === "Submit") {
-            setEquationCount(equationCount + 1);
-            // add to correct counter only when correct
-            if (userAnswer === correctAnswer) {
-                setCorrectAnswerCount(correctAnswerCount + 1);
-            }
+        setEquationCount(equationCount + 1);
+        // add to correct counter only when correct
+        if (userAnswer === correctAnswer) {
+            setCorrectAnswerCount(correctAnswerCount + 1);
         }
     }
     // #endregion equation counter - on button click
@@ -46,42 +44,49 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
             setMarkId('x-mark');
             let wrongAnswer = [firstNum, secondNum];
             setWrongAnswers((prev) => [...prev, wrongAnswer]);
-            console.log(wrongAnswer);
-            console.log(wrongAnswers);
         }
     }
+
+    const getNextQuestion = () => {
+        // reenables and puts focus on input
+        document.querySelector('#user-answer').disabled = false;
+        document.querySelector('#user-answer').focus();
+
+        // set new equation
+        setEquationIndex(Math.floor((Math.random() * (equationList.length - 1))));
+
+        setAnswerComplete(false);
+        inputValues['answerInput'] = '';
+        setInputValues(inputValues)
+    };
 
     // #region handle submit
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
 
+        setAnswerComplete(true);
         // #region change button and checkmark visibility
-        if (buttonState === "Submit") {
+        if (equationList.length > 0) {
             // disables input
             document.querySelector('#user-answer').disabled = true;
+
+            // remove current equation from list
+            equationList = equationList.filter(equation => equation !== equationList[equationIndex]);
+            setEquationList(equationList);
+
             // check answer and mark answer
             markAnswer();
-            setbuttonState("Next");
-        }
-        else if (buttonState === "Next") {
 
-            if (equationList.length > 0) {
-                // reenables and puts focus on input
-                document.querySelector('#user-answer').disabled = false;
-                document.querySelector('#user-answer').focus();
-                // remove current equation from list
-                setEquationList(equationList.filter(equation => equation !== equationList[equationIndex]));
-
-                // get new equation
-                setEquationIndex(Math.floor((Math.random() * (equationList.length - 1))));
-                setbuttonState("Submit");
-            }
-            else {
-                console.log('no numbers');
-            }
-            // resets input after "Next" button click
-            document.querySelector(".answer-input").value = "";
+            const nextQuestion = setTimeout(getNextQuestion, 2000);
+            return () => clearTimeout(getNextQuestion);
         }
+
+        if (equationList.length === 0) {
+            setTestState("retest");
+            console.log('no numbers');
+        }
+        // resets input after "Next" button click
+        document.querySelector(".answer-input").value = "";
     }
     // #endregion handle submit
 
@@ -90,14 +95,19 @@ function WorkArea({ equationCount, setEquationCount, correctAnswerCount, setCorr
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
                 <h2 className="equation-text">{firstNum} x {secondNum} =
                     <label className='sr-only' htmlFor='user-answer'>your answer</label>
-                    <input id='user-answer' className="input answer-input" type="text" size="4" maxLength={4} autoComplete="off" />
+                    <input
+                        id='user-answer'
+                        className="input answer-input"
+                        onChange={getHandler('answerInput')}
+                        value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
                 </h2>
-                <button className="answer-button button"
+                {/* add visibility-hidden to hide, while keeping position */}
+                <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}
                     onClick={(e) => { getEquationCount(e) }}>
-                    {buttonState}
+                    Submit
                 </button>
             </form>
-            {buttonState === "Next" ?
+            {answerComplete ?
                 <div id={markId} className="mark">{mark}</div>
                 : <></>
             }

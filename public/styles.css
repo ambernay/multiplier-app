@@ -633,4 +633,8 @@ li:hover::before {
     visibility: visible;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 /* #endregion retest */

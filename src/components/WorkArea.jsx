@@ -2,39 +2,33 @@ import React, { useState } from "react";
 
 function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
 
-    const [answerComplete, setAnswerComplete] = useState(false);
-
     let firstNum = equationList[equationIndex][0];
     let secondNum = equationList[equationIndex][1];
 
-    // #region answer validation
-    const correctAnswer = firstNum * secondNum;
+    // hides "submit" button until new question is displayed
+    const [answerComplete, setAnswerComplete] = useState(false);
+
     // answer validation mark
     const [mark, setMark] = useState('✗');
     const [markId, setMarkId] = useState('');
 
     // #endregion answer validation
 
-    // #region equation counter - on button click
-    function getEquationCount() {
-        const userAnswer = parseInt(document.querySelector(".answer-input").value);
-        // add to total counter on submit
-        setEquationCount(equationCount + 1);
-        // add to correct counter only when correct
-        if (userAnswer === correctAnswer) {
-            setCorrectAnswerCount(correctAnswerCount + 1);
-        }
-    }
-    // #endregion equation counter - on button click
     const [wrongAnswers, setWrongAnswers] = useState([]);
 
     const markAnswer = () => {
         // check answer and mark answer
+        const correctAnswer = firstNum * secondNum;
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
+
+        // add to total counter on submit
+        setEquationCount(equationCount + 1);
 
         if (userAnswer === correctAnswer) {
             setMark('✔︎');
             setMarkId('checkmark');
+            // add to correct counter only when correct
+            setCorrectAnswerCount(correctAnswerCount + 1);
 
             // setWrongAnswers(wrongAnswers.filter(equation => equation !== equationList[equationIndex]));
             // console.log(wrongAnswers);
@@ -52,8 +46,17 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
         document.querySelector('#user-answer').disabled = false;
         document.querySelector('#user-answer').focus();
 
+        // remove current equation from list
+        equationList = equationList.filter(equation => equation !== equationList[equationIndex]);
+        setEquationList(equationList);
+
         // set new equation
         setEquationIndex(Math.floor((Math.random() * (equationList.length - 1))));
+
+        if (equationList.length === 0) {
+            setTestState("retest");
+            console.log('no numbers');
+        }
 
         setAnswerComplete(false);
         inputValues['answerInput'] = '';
@@ -65,27 +68,17 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
         e.preventDefault();
 
         setAnswerComplete(true);
-        // #region change button and checkmark visibility
+
         if (equationList.length > 0) {
             // disables input
             document.querySelector('#user-answer').disabled = true;
 
-            // remove current equation from list
-            equationList = equationList.filter(equation => equation !== equationList[equationIndex]);
-            setEquationList(equationList);
-
             // check answer and mark answer
             markAnswer();
 
-            const nextQuestion = setTimeout(getNextQuestion, 2000);
-            return () => clearTimeout(getNextQuestion);
+            setTimeout(getNextQuestion, 2000);
         }
-
-        if (equationList.length === 0) {
-            setTestState("retest");
-            console.log('no numbers');
-        }
-        // resets input after "Next" button click
+        // resets input
         document.querySelector(".answer-input").value = "";
     }
     // #endregion handle submit
@@ -102,8 +95,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
                         value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
                 </h2>
                 {/* add visibility-hidden to hide, while keeping position */}
-                <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}
-                    onClick={(e) => { getEquationCount(e) }}>
+                <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>
                     Submit
                 </button>
             </form>

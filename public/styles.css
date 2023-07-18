@@ -581,6 +581,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .retest-title {
@@ -597,10 +598,6 @@ ul {
     row-gap: 35px;
     padding: 0;
     margin-top: 40px;
-}
-
-.retest-section:hover ul {
-    visibility: visible;
 }
 
 li {
@@ -635,6 +632,10 @@ li:hover::before {
 
 .hidden {
     visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }
 
 /* #endregion retest */

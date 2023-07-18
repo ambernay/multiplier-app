@@ -22,7 +22,9 @@ function App() {
     const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
 
     const [equationList, setEquationList] = useState([]);
-    const [equationIndex, setEquationIndex] = useState();
+    const [equationIndex, setEquationIndex] = useState(0);
+
+    const [wrongAnswers, setWrongAnswers] = useState([]);
 
     return (
         <div id="grid">
@@ -43,8 +45,18 @@ function App() {
                         setEquationList={setEquationList}
                         equationIndex={equationIndex}
                         setEquationIndex={setEquationIndex}
+                        setWrongAnswers={setWrongAnswers}
                     />
-                    : testState === "retest" ? <Retest />
+                    : testState === "retest" ?
+                        <Retest
+                            equationCount={equationCount}
+                            correctAnswerCount={correctAnswerCount}
+                            equationList={equationList}
+                            setEquationList={setEquationList}
+                            setEquationIndex={setEquationIndex}
+                            wrongAnswers={wrongAnswers}
+                            setTestState={setTestState}
+                        />
                         : null
                 }
                 <RangeSelection

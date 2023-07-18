@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex }) {
+function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
 
-    let firstNum = equationList[equationIndex][0];
-    let secondNum = equationList[equationIndex][1];
+    console.log(equationList, equationIndex);
+    // let firstNum = equationList[equationIndex][0];
+    // let secondNum = equationList[equationIndex][1];
+    let currentQuestion = equationList[equationIndex];
 
     // hides "submit" button until new question is displayed
     const [answerComplete, setAnswerComplete] = useState(false);
@@ -14,11 +16,10 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
 
     // #endregion answer validation
 
-    const [wrongAnswers, setWrongAnswers] = useState([]);
-
     const markAnswer = () => {
+
         // check answer and mark answer
-        const correctAnswer = firstNum * secondNum;
+        const correctAnswer = currentQuestion[0] * currentQuestion[1];
         const userAnswer = parseInt(document.querySelector(".answer-input").value);
 
         // add to total counter on submit
@@ -36,8 +37,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
         else {
             setMark('✗');
             setMarkId('x-mark');
-            let wrongAnswer = [firstNum, secondNum];
-            setWrongAnswers((prev) => [...prev, wrongAnswer]);
+            setWrongAnswers((prev) => [...prev, currentQuestion]);
         }
     }
 
@@ -86,7 +86,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
     return (
         <section className="work-area">
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
-                <h2 className="equation-text">{firstNum} x {secondNum} =
+                <h2 className="equation-text">{currentQuestion[0]} x {currentQuestion[1]} =
                     <label className='sr-only' htmlFor='user-answer'>your answer</label>
                     <input
                         id='user-answer'

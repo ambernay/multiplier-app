@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 
-function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
+function WorkArea({ testState, setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
 
-    console.log(equationList, equationIndex);
-    // let firstNum = equationList[equationIndex][0];
-    // let secondNum = equationList[equationIndex][1];
     let currentQuestion = equationList[equationIndex];
 
     // hides "submit" button until new question is displayed
@@ -20,7 +17,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
 
         // check answer and mark answer
         const correctAnswer = currentQuestion[0] * currentQuestion[1];
-        const userAnswer = parseInt(document.querySelector(".answer-input").value);
+        const userAnswer = parseInt(inputValues['answerInput']);
 
         // add to total counter on submit
         setEquationCount(equationCount + 1);
@@ -30,9 +27,6 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             setMarkId('checkmark');
             // add to correct counter only when correct
             setCorrectAnswerCount(correctAnswerCount + 1);
-
-            // setWrongAnswers(wrongAnswers.filter(equation => equation !== equationList[equationIndex]));
-            // console.log(wrongAnswers);
         }
         else {
             setMark('✗');

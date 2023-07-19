@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TopFrame, Heading } from "./Heading";
 import WorkArea from "./WorkArea";
 import Retest from './Retest';
@@ -25,6 +25,37 @@ function App() {
     const [equationIndex, setEquationIndex] = useState(0);
 
     const [wrongAnswers, setWrongAnswers] = useState([]);
+
+    // reset counter at beginning of every test
+    useEffect(() => {
+        if (testState === 'active') {
+            setEquationCount(0);
+            setCorrectAnswerCount(0);
+        }
+
+    }, [testState, setTestState, setEquationCount, setCorrectAnswerCount]);
+
+    const makeEquationList = () => {
+
+        // set minimum range to the lowest number
+        const minNum = Math.min(parseInt(inputValues['first']), parseInt(inputValues['last']));
+        const maxNum = Math.max(parseInt(inputValues['first']), parseInt(inputValues['last']));
+
+        const equationArr = [];
+        // creates an array of equations within range
+        for (let x = minNum; x <= maxNum; x++) {
+            for (let y = minNum; y <= maxNum; y++) {
+                let equation = [];
+                equation.push(x, y);
+                equationArr.push(equation);
+            }
+        }
+
+        setEquationList(equationArr);
+        setEquationIndex(Math.floor((Math.random() * equationArr.length)));
+
+        setTestState("active");
+    }
 
     return (
         <div id="grid">
@@ -55,25 +86,19 @@ function App() {
                             setEquationList={setEquationList}
                             setEquationIndex={setEquationIndex}
                             wrongAnswers={wrongAnswers}
+                            setWrongAnswers={setWrongAnswers}
                             setTestState={setTestState}
+                            makeEquationList={makeEquationList}
                         />
                         : null
                 }
                 <RangeSelection
-                    setTestState={setTestState}
                     getHandler={getHandler}
                     inputValues={inputValues}
-                    setInputValues={setInputValues}
-                    // back to zero when setting a new range
-                    setEquationCount={setEquationCount}
-                    setCorrectAnswerCount={setCorrectAnswerCount}
-                    equationList={equationList}
-                    setEquationList={setEquationList}
-                    setEquationIndex={setEquationIndex}
-                    equationIndex={equationIndex}
+                    makeEquationList={makeEquationList}
                 />
                 <Counter
-                    equationTotal={equationCount}
+                    equationCount={equationCount}
                     correctAnswerCount={correctAnswerCount}
                 />
             </main>

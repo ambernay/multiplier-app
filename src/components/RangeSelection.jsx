@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 function RangeSelection({ getHandler, inputValues, makeEquationList }) {
 
+    // focus first range input on load
+    const inputRef = useRef(null);
+    useEffect(() => {
+        inputRef.current.focus();
+    }, []);
 
     const handleSubmitRange = (e) => {
         e.preventDefault();
@@ -15,7 +20,8 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
             <form onSubmit={handleSubmitRange}>
                 <div className="selection">
                     <label className='sr-only' htmlFor='start'>Start Range</label>
-                    <input id='start' className="input" onFocus={(e) => e.target.select()}
+                    <input id='start' className="input" ref={inputRef}
+                        onFocus={(e) => e.target.select()}
                         onChange={getHandler('first')}
                         value={inputValues.first}
                         type="text" size="2" maxLength={2} autoComplete="off" />

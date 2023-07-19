@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-function WorkArea({ testState, setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
+function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
+
+    const answerInputRef = useRef(null);
 
     let currentQuestion = equationList[equationIndex];
 
@@ -17,7 +19,7 @@ function WorkArea({ testState, setTestState, getHandler, inputValues, setInputVa
 
         // check answer and mark answer
         const correctAnswer = currentQuestion[0] * currentQuestion[1];
-        const userAnswer = parseInt(inputValues['answerInput']);
+        const userAnswer = parseInt(inputValues['answerInputRef']);
 
         // add to total counter on submit
         setEquationCount(equationCount + 1);
@@ -37,8 +39,8 @@ function WorkArea({ testState, setTestState, getHandler, inputValues, setInputVa
 
     const getNextQuestion = () => {
         // reenables and puts focus on input
-        document.querySelector('#user-answer').disabled = false;
-        document.querySelector('#user-answer').focus();
+        answerInputRef.current.disabled = false;
+        answerInputRef.current.focus();
 
         // remove current equation from list
         equationList = equationList.filter(equation => equation !== equationList[equationIndex]);
@@ -53,7 +55,7 @@ function WorkArea({ testState, setTestState, getHandler, inputValues, setInputVa
         }
 
         setAnswerComplete(false);
-        inputValues['answerInput'] = '';
+        inputValues['answerInputRef'] = '';
         setInputValues(inputValues)
     };
 
@@ -85,8 +87,9 @@ function WorkArea({ testState, setTestState, getHandler, inputValues, setInputVa
                     <input
                         id='user-answer'
                         className="input answer-input"
-                        onChange={getHandler('answerInput')}
-                        value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
+                        ref={answerInputRef}
+                        onChange={getHandler('answerInputRef')}
+                        value={inputValues.answerInputRef} type="text" size="4" maxLength={4} autoComplete="off" />
                 </h2>
                 {/* add visibility-hidden to hide, while keeping position */}
                 <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>

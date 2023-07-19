@@ -31,6 +31,7 @@ function App() {
         if (testState === 'active') {
             setEquationCount(0);
             setCorrectAnswerCount(0);
+            document.querySelector('#user-answer').focus();
         }
 
     }, [testState, setTestState, setEquationCount, setCorrectAnswerCount]);

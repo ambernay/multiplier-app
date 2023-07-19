@@ -18,7 +18,12 @@ function Retest({ setTestState, equationCount, correctAnswerCount, setEquationLi
     }
 
     const showOptions = (e) => {
-        setRetestOptionClass('visible');
+        if (wrongAnswers.length > 0) {
+            setRetestOptionClass('visible');
+        }
+        else {
+            handleAllQuestionButton(e);
+        }
     }
 
     return (

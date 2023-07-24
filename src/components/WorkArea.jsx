@@ -72,7 +72,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             // check answer and mark answer
             markAnswer();
 
-            setTimeout(getNextQuestion, 2000);
+            setTimeout(getNextQuestion, 1500);
         }
         // resets input
         document.querySelector(".answer-input").value = "";
@@ -98,7 +98,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             </form>
             {answerComplete ?
                 <div id={markId} className="mark">{mark}</div>
-                : <></>
+                : <div id={markId} className="mark">{mark}</div>
             }
         </section>
     )

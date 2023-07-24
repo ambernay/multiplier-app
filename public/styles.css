@@ -308,6 +308,11 @@ h4 {
     --chalk-text: hsla(0, 0%, 100%, 0.7);
     --footer-gradient: linear-gradient(hsl(34, 72%, 35%), hsl(34, 73%, 20%));
     --header-gradient: linear-gradient(hsl(34, 73%, 20%), hsl(34, 72%, 35%));
+    --checkmark-solid: #bcdf8a;
+    --checkmark-transparent: #97ce4b94;
+    --xmark-solid: #ed7777;
+    --xmark-transparent: #e5343491;
+    /* fonts */
     --title-font: 'Londrina Outline', cursive;
     --work-area-font: 'Callie Chalk Font', sans-serif;
     --wood-font: 'Neucha', cursive;
@@ -471,24 +476,24 @@ main {
 .mark {
     display: grid;
     position: absolute;
-    font-size: 10vmin;
-    margin-top: 5vh;
-    margin-left: 20vw;
+    font-size: 4rem;
+    margin-top: 6rem;
+    margin-left: calc(10vw + 7rem);
 }
 
 #checkmark {
-    background: url(./images/textures/green_chalk_texture.png) no-repeat center center;
+    background: url(./images/textures/white_chalk_texture_square.png) no-repeat center center;
     background-size: cover;
-    color: #fff;
-    -webkit-text-fill-color: transparent;
+    color: var(--checkmark-solid);
+    -webkit-text-fill-color: var(--checkmark-transparent);
     -webkit-background-clip: text;
 }
 
 #x-mark {
-    background: url(./images/textures/red_chalk_texture.png) no-repeat center center;
+    background: url(./images/textures/white_chalk_texture_square.png) no-repeat center center;
     background-size: cover;
-    color: #fff;
-    -webkit-text-fill-color: transparent;
+    color: var(--x-mark-solid);
+    -webkit-text-fill-color: var(--xmark-transparent);
     -webkit-background-clip: text;
 }
 
@@ -511,7 +516,7 @@ main {
     background-position-y: bottom;
     justify-content: center;
     align-items: center;
-    height: 15rem;
+    height: 12rem;
     width: 100%;
 }
 
@@ -551,9 +556,9 @@ form {
     background-color: transparent;
     border-style: none;
     border-bottom: 3px solid var(--chalk-text);
-    height: 2.6rem;
     font-family: var(--work-area-font);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    line-height: 1.8rem;
     text-align: center;
     padding: 2px 4px;
     margin: 10px 0 25px 0;
@@ -630,8 +635,8 @@ li:hover .retest-button {
 li::before {
     visibility: hidden;
     content: '✔︎';
-    color: #bcdf8a;
-    -webkit-text-fill-color: #97ce4b73;
+    color: var(--checkmark-solid);
+    -webkit-text-fill-color: var(--checkmark-transparent);
     padding: 15px;
     font-size: 1.6rem;
 }

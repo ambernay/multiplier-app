@@ -20,7 +20,7 @@ section {
 
 h1 {
     font-size: 2em;
-    margin: .67em 0
+    margin: 0
 }
 
 figcaption,
@@ -321,23 +321,23 @@ h4 {
         "header"
         "main"
         "footer";
-    grid-template-rows: 10vh 80vh 10vh;
+    grid-template-rows: 7vh 86vh 7vh;
     grid-template-columns: 100vw;
 }
 
 .title-text,
 .work-area,
 .retest-section,
-.range,
+.form-label,
 .input,
-.counter-box,
+.to,
 button,
 .total {
     text-align: center;
     opacity: 0.8;
     /* #region - font chalk texture */
-    background: url(./images/textures/white_chalk_texture.png) no-repeat center center;
-    background-size: cover;
+    background: url(./images/textures/white_chalk_texture_square.png) repeat center center;
+    background-size: 25px;
     color: #fff;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
@@ -364,7 +364,7 @@ main {
     grid-template-areas:
         "board-top board-top board-top"
         "board-left board-mid-bottom board-right";
-    grid-template-rows: 20vh 60vh;
+    grid-template-rows: 16vh 70vh;
     grid-template-columns: 30vw 40vw 30vw;
 
     background: url(./images/textures/chalkboard_texture_wgrain.png) no-repeat;
@@ -399,7 +399,6 @@ main {
 .title-text {
     font-family: var(--title-font);
     font-size: 10vh;
-    margin: 1vh;
     padding: 0 25px;
 }
 
@@ -501,7 +500,6 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    font-size: 4vmin;
     font-family: var(--work-area-font);
 }
 
@@ -510,10 +508,16 @@ main {
     background: url('./images/chalk_apple.png') no-repeat;
     background-size: contain;
     background-position-x: center;
+    background-position-y: bottom;
     justify-content: center;
     align-items: center;
-    height: 50%;
+    height: 15rem;
     width: 100%;
+}
+
+.total {
+    font-size: 1.8rem;
+    background-position-y: center;
 }
 
 /* #endregion - counter */
@@ -523,6 +527,12 @@ main {
     grid-area: board-left;
     transform: skew(-1deg, -15deg);
     margin: 5vh 1vw;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-label {

@@ -13,18 +13,21 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
     const [mark, setMark] = useState('✗');
     const [markId, setMarkId] = useState('');
 
+    const correctAnswer = currentQuestion[0] * currentQuestion[1];
+    const userAnswer = parseInt(inputValues['answerInputRef']);
+    const isCorrect = userAnswer === correctAnswer;
+
     // #endregion answer validation
 
     const markAnswer = () => {
 
         // check answer and mark answer
-        const correctAnswer = currentQuestion[0] * currentQuestion[1];
-        const userAnswer = parseInt(inputValues['answerInputRef']);
+
 
         // add to total counter on submit
         setEquationCount(equationCount + 1);
 
-        if (userAnswer === correctAnswer) {
+        if (isCorrect) {
             setMark('✔︎');
             setMarkId('checkmark');
             // add to correct counter only when correct
@@ -82,25 +85,32 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
     return (
         <section className="work-area">
             <form className="work-area-form" onSubmit={handleSubmitAnswer}>
-                <h2 className="equation-text">{currentQuestion[0]} x {currentQuestion[1]} =
-                    <label className='sr-only' htmlFor='user-answer'>your answer</label>
-                    <input
-                        id='user-answer'
-                        className="input answer-input"
-                        ref={answerInputRef}
-                        onChange={getHandler('answerInputRef')}
-                        value={inputValues.answerInputRef} type="text" size="4" maxLength={4} autoComplete="off" />
-                </h2>
+                <div className="equation-text-container">
+                    <h2 className="equation-text">{currentQuestion[0]} x {currentQuestion[1]} =
+                    </h2>
+                    {answerComplete && !isCorrect ?
+                        < h2 className="correct-answer">{correctAnswer}</h2>
+                        : null}
+                </div>
+                <label className='sr-only' htmlFor='user-answer'>your answer</label>
+                <input
+                    id='user-answer'
+                    className="input answer-input"
+                    ref={answerInputRef}
+                    onChange={getHandler('answerInputRef')}
+                    value={inputValues.answerInputRef} type="text" size="4" maxLength={4} autoComplete="off" />
+
                 {/* add visibility-hidden to hide, while keeping position */}
                 <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>
                     Submit
                 </button>
             </form>
-            {answerComplete ?
-                <div id={markId} className="mark">{mark}</div>
-                : <div id={markId} className="mark">{mark}</div>
+            {
+                answerComplete ?
+                    <div id={markId} className="mark">{mark}</div>
+                    : null
             }
-        </section>
+        </section >
     )
 }
 

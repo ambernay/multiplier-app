@@ -335,6 +335,7 @@ h4 {
 .retest-section,
 .form-label,
 .input,
+.correct-answer,
 .to,
 button,
 .total {
@@ -403,7 +404,7 @@ main {
 
 .title-text {
     font-family: var(--title-font);
-    font-size: 10vh;
+    font-size: calc(7vh + 2rem);
     padding: 0 25px;
 }
 
@@ -459,10 +460,20 @@ main {
     display: grid;
 }
 
-.equation-text {
+.equation-text-container {
+    display: flex;
+}
+
+.equation-text,
+.correct-answer {
     display: grid;
     align-content: end;
     line-height: 10vmax;
+}
+
+.correct-answer {
+    position: absolute;
+    margin-left: calc(10vw + 3rem);
 }
 
 .answer-input {

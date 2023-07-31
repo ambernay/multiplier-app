@@ -308,10 +308,15 @@ h4 {
     --chalk-text: hsla(0, 0%, 100%, 0.7);
     --footer-gradient: linear-gradient(hsl(34, 72%, 35%), hsl(34, 73%, 20%));
     --header-gradient: linear-gradient(hsl(34, 73%, 20%), hsl(34, 72%, 35%));
+    --button-border: hsla(170, 35%, 69%, 0.7);
+    /* mark colors */
     --checkmark-solid: #bcdf8a;
     --checkmark-transparent: #97ce4b94;
     --xmark-solid: #ed7777;
     --xmark-transparent: #e5343491;
+    /* main colors */
+    --main-text-color: #fff;
+    --main-text-fill: transparent;
     /* fonts */
     --title-font: 'Londrina Outline', cursive;
     --work-area-font: 'Callie Chalk Font', sans-serif;
@@ -335,17 +340,20 @@ h4 {
 .retest-section,
 .form-label,
 .input,
+.answer-circle,
 .correct-answer,
 .to,
 button,
-.total {
+.total,
+#x-mark,
+#checkmark {
     text-align: center;
     opacity: 0.8;
     /* #region - font chalk texture */
     background: url(./images/textures/white_chalk_texture_square.png) repeat center center;
     background-size: 25px;
-    color: #fff;
-    -webkit-text-fill-color: transparent;
+    color: var(--main-text-color);
+    -webkit-text-fill-color: var(--main-text-fill);
     -webkit-background-clip: text;
     /* #endregion - font chalk texture */
 }
@@ -471,9 +479,13 @@ main {
     line-height: 10vmax;
 }
 
-.correct-answer {
+.answer-circle {
     position: absolute;
     margin-left: calc(10vw + 3rem);
+    background: url('./images/oblong_scribble.png') no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 13%;
 }
 
 .answer-input {
@@ -492,20 +504,20 @@ main {
     margin-left: calc(10vw + 7rem);
 }
 
-#checkmark {
-    background: url(./images/textures/white_chalk_texture_square.png) no-repeat center center;
+.mark {
     background-size: cover;
-    color: var(--checkmark-solid);
-    -webkit-text-fill-color: var(--checkmark-transparent);
-    -webkit-background-clip: text;
+}
+
+#checkmark {
+    /* redefining fill colors for checkmark */
+    --main-text-color: var(--checkmark-solid);
+    --main-text-fill: var(--checkmark-transparent);
 }
 
 #x-mark {
-    background: url(./images/textures/white_chalk_texture_square.png) no-repeat center center;
-    background-size: cover;
-    color: var(--x-mark-solid);
-    -webkit-text-fill-color: var(--xmark-transparent);
-    -webkit-background-clip: text;
+    /* redefining fill colors for x-mark */
+    --main-text-color: var(--xmark-solid);
+    --main-text-fill: var(--xmark-transparent);
 }
 
 /* #endregion - workspace area */
@@ -584,7 +596,7 @@ form {
 
 .button,
 .retest-title {
-    border: 3px solid hsla(170, 35%, 69%, 0.7);
+    border: 3px solid var(--button-border);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     padding: 15px 10px 5px 10px;
 }

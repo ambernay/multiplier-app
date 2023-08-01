@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 
 function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
 
-    const answerInputRef = useRef(null);
+    const answerInputRef = useRef(false);
 
     let currentQuestion = equationList[equationIndex];
 
@@ -65,21 +65,17 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
 
-        const answerInputField = document.querySelector('#user-answer');
-
         setAnswerComplete(true);
 
         if (equationList.length > 0) {
             // disables input
-            answerInputField.disabled = true;
+            answerInputRef.current.disabled = true;
 
             // check answer and mark answer
             markAnswer();
 
             setTimeout(getNextQuestion, 1500);
         }
-        // resets input
-        // answerInputField.value = "";
     }
     // #endregion handle submit
 

@@ -2,16 +2,24 @@ import React, { useRef, useEffect } from "react";
 
 function RangeSelection({ getHandler, inputValues, makeEquationList }) {
 
-    // focus first range input on load
     const inputRef = useRef(null);
+    const buttonRef = useRef(false);
 
     useEffect(() => {
+        // focus first range input on load
         inputRef.current.focus();
     }, []);
+
+    useEffect(() => {
+        // re-enables 'make table' button when range inputs change
+        buttonRef.current.disabled = false;
+    }, [inputValues]);
 
     const handleSubmitRange = (e) => {
         e.preventDefault();
         makeEquationList();
+        // disables 'make table' button until range inputs change
+        buttonRef.current.disabled = true;
     };
 
     return (
@@ -33,7 +41,8 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
                         onChange={getHandler('last')}
                         value={inputValues.last} type="text" size="2" maxLength={2} autoComplete="off" />
                 </div>
-                <button className="button">Make Table</button>
+                <button className="button" ref={buttonRef}
+                >Make Table</button>
             </form>
         </section>
     )

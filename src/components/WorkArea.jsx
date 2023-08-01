@@ -14,7 +14,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
     const [markId, setMarkId] = useState('');
 
     const correctAnswer = currentQuestion[0] * currentQuestion[1];
-    const userAnswer = parseInt(inputValues['answerInputRef']);
+    const userAnswer = parseInt(inputValues['answerInput']);
     const isCorrect = userAnswer === correctAnswer;
 
     // #endregion answer validation
@@ -54,23 +54,24 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
 
         if (equationList.length === 0) {
             setTestState("retest");
-            console.log('no numbers');
         }
 
         setAnswerComplete(false);
-        inputValues['answerInputRef'] = '';
-        setInputValues(inputValues)
+        // empty answer-input field
+        setInputValues({ ...inputValues, 'answerInput': '' });
     };
 
     // #region handle submit
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
 
+        const answerInputField = document.querySelector('#user-answer');
+
         setAnswerComplete(true);
 
         if (equationList.length > 0) {
             // disables input
-            document.querySelector('#user-answer').disabled = true;
+            answerInputField.disabled = true;
 
             // check answer and mark answer
             markAnswer();
@@ -78,7 +79,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             setTimeout(getNextQuestion, 1500);
         }
         // resets input
-        document.querySelector(".answer-input").value = "";
+        // answerInputField.value = "";
     }
     // #endregion handle submit
 
@@ -99,8 +100,8 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
                     id='user-answer'
                     className="input answer-input"
                     ref={answerInputRef}
-                    onChange={getHandler('answerInputRef')}
-                    value={inputValues.answerInputRef} type="text" size="4" maxLength={4} autoComplete="off" />
+                    onChange={getHandler('answerInput')}
+                    value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
 
                 {/* add visibility-hidden to hide, while keeping position */}
                 <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>

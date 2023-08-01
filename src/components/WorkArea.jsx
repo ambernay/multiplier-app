@@ -89,7 +89,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
                 <div className="equation-text-container">
                     <h2 className="equation-text">{currentQuestion[0]} x {currentQuestion[1]} =
                     </h2>
-                    {!isCorrect ?
+                    {(!isCorrect && answerComplete) ?
                         <div className="answer-circle">
                             <h2 className="correct-answer">{correctAnswer}</h2>
                         </div>
@@ -111,7 +111,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             {
                 answerComplete ?
                     <div id={markId} className="mark">{mark}</div>
-                    : <div id={markId} className="mark">{mark}</div>
+                    : null
             }
         </section>
     )

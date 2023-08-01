@@ -14,7 +14,11 @@ function App() {
 
     const getHandler = (name) => {
         return (e) => {
-            setInputValues({ ...inputValues, [name]: e.target.value });
+            // only accepts numbers for input values
+            if (Number.isInteger(Number(e.target.value))) {
+                setInputValues({ ...inputValues, [name]: e.target.value });
+            }
+
         }
     }
 

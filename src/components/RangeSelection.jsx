@@ -11,8 +11,8 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
     }, []);
 
     useEffect(() => {
-        // re-enables 'make table' button when range inputs change
-        buttonRef.current.disabled = false;
+        // re-enables 'make table' button when range inputs change and both inputs have values
+        buttonRef.current.disabled = (inputValues.first && inputValues.last) ? false : true;
     }, [inputValues.first, inputValues.last]);
 
     const handleSubmitRange = (e) => {

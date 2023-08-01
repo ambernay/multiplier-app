@@ -28,12 +28,15 @@ function App() {
 
     // reset counter at beginning of every test
     useEffect(() => {
-        if (testState === 'active') {
+        // reset between 'initial' and 'active' states
+        if (testState === 'between-states') {
             setEquationCount(0);
             setCorrectAnswerCount(0);
+            setTestState('active');
+        }
+        else if (testState === 'active') {
             document.querySelector('#user-answer').focus();
         }
-
     }, [testState, setTestState, setEquationCount, setCorrectAnswerCount]);
 
     const makeEquationList = () => {
@@ -54,8 +57,8 @@ function App() {
 
         setEquationList(equationArr);
         setEquationIndex(Math.floor((Math.random() * equationArr.length)));
-
-        setTestState("active");
+        // reset between 'inital' and 'active' states
+        setTestState('between-states');
     }
 
     return (
@@ -97,6 +100,8 @@ function App() {
                     getHandler={getHandler}
                     inputValues={inputValues}
                     makeEquationList={makeEquationList}
+                    testState={testState}
+                    setTestState={setTestState}
                 />
                 <Counter
                     equationCount={equationCount}

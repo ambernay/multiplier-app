@@ -28,6 +28,7 @@ function Retest({ setTestState, equationCount, correctAnswerCount, setEquationLi
 
     return (
         <section className="retest-section">
+            {/* calculates user percentage */}
             <h3>You got {Math.round((correctAnswerCount * 100) / equationCount)}%</h3>
             <form className="retest-container" onSubmit={(e) => e.preventDefault()}>
                 <button type='button' className="retest-title" onClick={showOptions}>Restart Test?</button>

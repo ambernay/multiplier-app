@@ -4,6 +4,7 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
 
     // focus first range input on load
     const inputRef = useRef(null);
+
     useEffect(() => {
         inputRef.current.focus();
     }, []);
@@ -12,7 +13,6 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
         e.preventDefault();
         makeEquationList();
     };
-
 
     return (
         <section className="range">

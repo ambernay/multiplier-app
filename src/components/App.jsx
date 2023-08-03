@@ -105,7 +105,6 @@ function App() {
                     inputValues={inputValues}
                     makeEquationList={makeEquationList}
                     testState={testState}
-                    setTestState={setTestState}
                 />
                 <Counter
                     equationCount={equationCount}

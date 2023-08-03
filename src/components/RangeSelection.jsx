@@ -1,9 +1,22 @@
 import React, { useRef, useEffect } from "react";
 
-function RangeSelection({ getHandler, inputValues, makeEquationList }) {
+function RangeSelection({ getHandler, inputValues, makeEquationList, testState }) {
 
     const inputRef = useRef(null);
     const buttonRef = useRef(false);
+
+    const formLabel =
+        (window.innerWidth < window.innerHeight) ?
+            ((testState === 'initial') ? 'Choose Table Range:' : 'Table')
+            : 'Choose Table Range:';
+
+    const rangeClass =
+        (window.innerWidth < window.innerHeight) ?
+            ((testState === 'initial') ? 'range reduced-size' : 'range')
+            : 'range';
+
+
+
 
     useEffect(() => {
         // focus first range input on load
@@ -23,8 +36,8 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
     };
 
     return (
-        <section className="range">
-            <h3 className="form-label">Choose Table Range:</h3>
+        <section className='range'>
+            <h3 className="form-label">Choose Range:</h3>
             <form onSubmit={handleSubmitRange}>
                 <div className="selection">
                     <label className='sr-only' htmlFor='start'>Start Range</label>

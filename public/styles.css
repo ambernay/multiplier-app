@@ -321,6 +321,9 @@ h4 {
     --title-font: 'Londrina Outline', cursive;
     --work-area-font: 'Callie Chalk Font', sans-serif;
     --wood-font: 'Neucha', cursive;
+    /* sizes */
+    --apple-size: calc(10rem + 5vw);
+    --main-grid-columns: 30vw 40vw 30vw;
 }
 
 /* #endregion - variables */
@@ -360,10 +363,10 @@ button,
 
 .work-area,
 .retest-section,
-.range,
-button {
+.range {
     font-family: var(--work-area-font);
-    font-size: 2vmax;
+    font-size: calc(0.8rem + 1vw);
+    line-height: calc(1.8rem + 1vw);
 }
 
 body {
@@ -377,9 +380,9 @@ main {
     grid-area: main;
     grid-template-areas:
         "board-top board-top board-top"
-        "board-left board-right board-right";
+        "board-left board-mid board-right";
     grid-template-rows: 16vh 70vh;
-    grid-template-columns: 30vw 40vw 30vw;
+    grid-template-columns: var(--main-grid-columns);
 
     background: url(./images/textures/chalkboard_texture_wgrain.png) no-repeat;
     background-size: cover;
@@ -457,7 +460,7 @@ main {
 /* #region - workspace area */
 
 .work-area {
-    grid-area: board-mid-bottom;
+    grid-area: board-mid;
     /* position */
     display: flex;
     justify-content: center;
@@ -540,8 +543,8 @@ main {
     background-position-y: bottom;
     justify-content: center;
     align-items: center;
-    height: calc(10rem + 5vw);
-    width: calc(10rem + 5vw);
+    height: var(--apple-size);
+    width: var(--apple-size);
 }
 
 .total {
@@ -549,7 +552,7 @@ main {
     background-position-y: center;
     width: 60%;
     line-height: 2.5rem;
-    margin-top: 21px;
+    margin-top: 25px;
 }
 
 /* #endregion - counter */
@@ -557,8 +560,8 @@ main {
 /* #region - range selection */
 .range {
     grid-area: board-left;
-    transform: skew(-1deg, -15deg);
-    margin: 5vh 1vw;
+
+    margin: 5vh 20px;
 }
 
 form {
@@ -569,7 +572,6 @@ form {
 
 .form-label {
     margin: 0;
-    line-height: 1.8rem;
 }
 
 .selection {
@@ -584,8 +586,8 @@ form {
     border-style: none;
     border-bottom: 3px solid var(--chalk-text);
     font-family: var(--work-area-font);
-    font-size: 1.8rem;
-    line-height: 1.8rem;
+    font-size: inherit;
+    line-height: inherit;
     text-align: center;
     padding: 2px 4px;
     margin: 10px 0 25px 0;
@@ -602,7 +604,10 @@ form {
 .retest-title {
     border: 3px solid var(--button-border);
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-    padding: 15px 10px 5px 10px;
+    padding: 8px 10px 0 10px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 button:hover {
@@ -683,17 +688,54 @@ li:hover::before {
 /* #endregion retest */
 
 /* #region media queries */
-@media (max-width: 660px) {
+
+@media (min-width: 761px) {
+    .range {
+        transform: skew(-1deg, -15deg);
+    }
+}
+
+@media (orientation: portrait) {
+
     main {
         grid-template-areas:
             "board-top board-top board-top"
-            "board-left board-mid-bottom empty-space"
-            "board-left board-right board-right";
+            "board-left board-mid board-right"
+            "board-bottom-left board-bottom-mid board-right";
         grid-template-rows: 16vh 40vh 30vh;
-        grid-template-columns: 30vw 40vw 30vw;
+        --main-grid-column: 20vw 60vw 20vw grid-template-columns: var(--main-grid-column);
     }
 
+    .range {
+        grid-area: board-mid;
+        margin: 3vh;
+    }
+}
 
+@media (orientation: portrait) and (max-width: 500px) {
+    main {
+        /* changed sides from 20vw to 10vw */
+        --main-grid-columns: 10vw 80vw 10vw;
+    }
+}
+
+@media (max-height: 500px) {
+
+    .work-area,
+    .retest-section,
+    .range {
+        font-size: 0.8rem;
+        line-height: 1.8rem;
+    }
+
+    .apple-wrapper {
+        /* redifine to make apple smaller */
+        --apple-size: calc(9rem + 4vw);
+    }
+}
+
+.display-none {
+    display: none;
 }
 
 /* #endregion media queries */

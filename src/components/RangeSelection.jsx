@@ -5,18 +5,7 @@ function RangeSelection({ getHandler, inputValues, makeEquationList, testState }
     const inputRef = useRef(null);
     const buttonRef = useRef(false);
 
-    const formLabel =
-        (window.innerWidth < window.innerHeight) ?
-            ((testState === 'initial') ? 'Choose Table Range:' : 'Table')
-            : 'Choose Table Range:';
-
-    const rangeClass =
-        (window.innerWidth < window.innerHeight) ?
-            ((testState === 'initial') ? 'range reduced-size' : 'range')
-            : 'range';
-
-
-
+    const screenOrientation = (window.innerWidth < window.innerHeight) ? 'portrait' : 'landscape';
 
     useEffect(() => {
         // focus first range input on load
@@ -36,28 +25,37 @@ function RangeSelection({ getHandler, inputValues, makeEquationList, testState }
     };
 
     return (
-        <section className='range'>
-            <h3 className="form-label">Choose Range:</h3>
-            <form onSubmit={handleSubmitRange}>
-                <div className="selection">
-                    <label className='sr-only' htmlFor='start'>Start Range</label>
-                    <input id='start' className="input" ref={inputRef}
-                        onFocus={(e) => e.target.select()}
-                        onChange={getHandler('first')}
-                        value={inputValues.first}
-                        type="text" size="2" maxLength={2} autoComplete="off" />
+        <>
+            {screenOrientation === 'landscape' || (screenOrientation === 'portrait' && testState === 'initial') ?
+                <section className='range'>
+                    <h3 className="form-label">Choose Range:</h3>
+                    <form onSubmit={handleSubmitRange}>
+                        <div className="selection">
+                            <label className='sr-only' htmlFor='start'>Start Range</label>
+                            <input id='start' className="input" ref={inputRef}
+                                onFocus={(e) => e.target.select()}
+                                onChange={getHandler('first')}
+                                value={inputValues.first}
+                                type="text" size="2" maxLength={2} autoComplete="off" />
 
-                    <p className="to">to</p>
+                            <p className="to">to</p>
 
-                    <label className='sr-only' htmlFor='end'>End Range</label>
-                    <input id='end' className="input" onFocus={(e) => e.target.select()}
-                        onChange={getHandler('last')}
-                        value={inputValues.last} type="text" size="2" maxLength={2} autoComplete="off" />
+                            <label className='sr-only' htmlFor='end'>End Range</label>
+                            <input id='end' className="input" onFocus={(e) => e.target.select()}
+                                onChange={getHandler('last')}
+                                value={inputValues.last} type="text" size="2" maxLength={2} autoComplete="off" />
+                        </div>
+                        <button className="button" ref={buttonRef}
+                        >Make Table</button>
+                    </form>
+                </section>
+                :
+                <div className='range-button-container'>
+                    <button className="button toggle" ref={buttonRef}
+                    >New Table</button>
                 </div>
-                <button className="button" ref={buttonRef}
-                >Make Table</button>
-            </form>
-        </section>
+            }
+        </>
     )
 }
 

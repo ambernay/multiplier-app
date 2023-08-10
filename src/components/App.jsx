@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TopFrame, Heading } from "./Heading";
+import RangeButton from './RangeButton';
 import WorkArea from "./WorkArea";
 import Retest from './Retest';
 import RangeSelection from "./RangeSelection";
@@ -7,6 +8,13 @@ import Counter from "./Counter";
 import Footer from "./Footer";
 
 function App() {
+
+    const [screenOrientation, setScreenOrientation] = useState('landscape');
+
+    useEffect(() => {
+        window.addEventListener('resize', () => setScreenOrientation(
+            (window.innerWidth < window.innerHeight) ? 'portrait' : 'landscape'));
+    }, [setScreenOrientation]);
 
     const [testState, setTestState] = useState("initial");
 
@@ -68,6 +76,13 @@ function App() {
     return (
         <div id="grid">
             <TopFrame />
+
+            {(screenOrientation === 'portrait' && testState !== 'initial') ?
+                <RangeButton
+                    setTestState={setTestState}
+                />
+                : null
+            }
             <main>
                 <Heading />
                 {testState === "active" ?
@@ -100,12 +115,16 @@ function App() {
                         />
                         : null
                 }
-                <RangeSelection
-                    getHandler={getHandler}
-                    inputValues={inputValues}
-                    makeEquationList={makeEquationList}
-                    testState={testState}
-                />
+                {screenOrientation === 'landscape' || (screenOrientation === 'portrait' && testState === 'initial') ?
+                    <RangeSelection
+                        getHandler={getHandler}
+                        inputValues={inputValues}
+                        makeEquationList={makeEquationList}
+                        testState={testState}
+                        setTestState={setTestState}
+                    />
+                    : null
+                }
                 <Counter
                     equationCount={equationCount}
                     correctAnswerCount={correctAnswerCount}

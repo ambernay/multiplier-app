@@ -306,8 +306,8 @@ h4 {
 :root {
     --background-green: hsl(121, 71%, 15%);
     --chalk-text: hsla(0, 0%, 100%, 0.7);
-    --footer-gradient: linear-gradient(hsl(34, 72%, 35%), hsl(34, 73%, 20%));
-    --header-gradient: linear-gradient(hsl(34, 73%, 20%), hsl(34, 72%, 35%));
+    --footer-gradient: linear-gradient(to top, hsl(34, 73%, 20%), hsl(34, 72%, 35%));
+    --header-gradient: linear-gradient(to bottom, hsl(34, 73%, 20%), hsl(34, 72%, 35%));
     --button-border: hsla(170, 35%, 69%, 0.7);
     /* mark colors */
     --checkmark-solid: #bcdf8a;
@@ -317,6 +317,10 @@ h4 {
     /* main colors */
     --main-text-color: #fff;
     --main-text-fill: transparent;
+    --wood-text-color: #aca697;
+    --wood-text-fill: #6f6a5e78;
+    --range-button-text: #b8ad948a;
+    --range-button-hover: #b8ad942b;
     /* fonts */
     --title-font: 'Londrina Outline', cursive;
     --work-area-font: 'Callie Chalk Font', sans-serif;
@@ -339,6 +343,7 @@ h4 {
 }
 
 .title-text,
+.footer-text,
 .work-area,
 .retest-section,
 .form-label,
@@ -445,16 +450,40 @@ main {
     height: 100%;
 }
 
-.wood-grain h4 {
+.footer-text-container {
+    display: flex;
+    grid-area: footer;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-text,
+.toggle {
     font-family: var(--wood-font);
     font-size: 5vmin;
-    color: #fff;
+    color: var(--wood-text-color);
     -webkit-text-stroke: 0.1px #000;
-    text-shadow: 0 0 2px #000, 0 0 6px #000;
+    -webkit-text-fill-color: var(--wood-text-fill);
     mix-blend-mode: hard-light;
     letter-spacing: 0.4rem;
     text-align: center;
     transform: skew(-20deg, 0deg);
+}
+
+/* range toggle button */
+.range-button-container {
+    display: flex;
+    grid-area: header;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2px 25px;
+}
+
+.toggle {
+    -webkit-text-fill-color: var(--range-button-text);
 }
 
 /* #endregion - heading  */
@@ -611,8 +640,12 @@ form {
     line-height: inherit;
 }
 
-button:hover {
+button:hover:not(.toggle) {
     text-shadow: 0 0 20px hsla(0, 0%, 100%, 0.7);
+}
+
+.toggle:hover {
+    -webkit-text-fill-color: var(--range-button-hover);
 }
 
 /* #endregion - range selection */
@@ -688,20 +721,6 @@ li:hover::before {
 
 /* #endregion retest */
 
-/* #region range toggle button */
-.range-button-container {
-    display: flex;
-    grid-area: board-bottom-mid;
-    height: 100%;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.toggle {
-    height: fit-content;
-    width: 35%;
-}
-
 /* #endregion range toggle button */
 
 /* #region media queries */
@@ -733,6 +752,11 @@ li:hover::before {
     main {
         /* changed sides from 20vw to 10vw */
         --main-grid-columns: 10vw 80vw 10vw;
+    }
+
+    .range-button-container {
+        grid-area: board-bottom-mid;
+        justify-content: flex-start;
     }
 }
 

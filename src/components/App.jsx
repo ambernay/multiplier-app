@@ -13,7 +13,7 @@ function App() {
     const [showRangeSection, setShowRangeSection] = useState(true);
     const [testState, setTestState] = useState("initial");
 
-    const screenDimensions = (window.innerWidth <= 761 && window.innerHeight > 761) ? 'portrait' : 'landscape';
+    const screenDimensions = (window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape';
     const [screenOrientation, setScreenOrientation] = useState(screenDimensions);
 
     useEffect(() => {

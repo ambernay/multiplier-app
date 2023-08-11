@@ -106,7 +106,9 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             </form>
             {
                 answerComplete ?
-                    <div id={markId} className="mark">{mark}</div>
+                    <figure id={markId} className="mark">{mark}
+                        <figcaption className="sr-only">{markId}</figcaption>
+                    </figure>
                     : null
             }
         </section>

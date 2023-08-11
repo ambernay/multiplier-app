@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-function RangeSelection({ getHandler, inputValues, makeEquationList, testState, setTestState }) {
+function RangeSelection({ getHandler, inputValues, makeEquationList }) {
 
     const inputRef = useRef(null);
     const buttonRef = useRef(false);

@@ -459,13 +459,16 @@ main {
     align-items: center;
 }
 
+.footer-text {
+    font-size: 5vmin;
+    -webkit-text-fill-color: var(--wood-text-fill);
+}
+
 .footer-text,
 .toggle {
     font-family: var(--wood-font);
-    font-size: 5vmin;
     color: var(--wood-text-color);
     -webkit-text-stroke: 0.1px #000;
-    -webkit-text-fill-color: var(--wood-text-fill);
     mix-blend-mode: hard-light;
     letter-spacing: 0.4rem;
     text-align: center;
@@ -483,6 +486,7 @@ main {
 }
 
 .toggle {
+    font-size: 1.8rem;
     -webkit-text-fill-color: var(--range-button-text);
 }
 
@@ -731,7 +735,7 @@ li:hover::before {
     }
 }
 
-@media (orientation: portrait) {
+@media (max-width: 761px) and (min-height: 761px) {
 
     main {
         grid-template-areas:
@@ -752,11 +756,6 @@ li:hover::before {
     main {
         /* changed sides from 20vw to 10vw */
         --main-grid-columns: 10vw 80vw 10vw;
-    }
-
-    .range-button-container {
-        grid-area: board-bottom-mid;
-        justify-content: flex-start;
     }
 }
 

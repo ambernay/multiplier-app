@@ -9,14 +9,24 @@ import Footer from "./Footer";
 
 function App() {
 
-    const [screenOrientation, setScreenOrientation] = useState('landscape');
+
+    const [showRangeSection, setShowRangeSection] = useState(true);
+    const [testState, setTestState] = useState("initial");
+
+    const screenDimensions = (window.innerWidth <= 761 && window.innerHeight > 761) ? 'portrait' : 'landscape';
+    const [screenOrientation, setScreenOrientation] = useState(screenDimensions);
 
     useEffect(() => {
-        window.addEventListener('resize', () => setScreenOrientation(
-            (window.innerWidth < window.innerHeight) ? 'portrait' : 'landscape'));
-    }, [setScreenOrientation]);
 
-    const [testState, setTestState] = useState("initial");
+        window.addEventListener('resize', () => setScreenOrientation(screenDimensions));
+
+        if (screenDimensions === 'portrait' && testState !== 'initial') {
+            setShowRangeSection(false);
+        }
+        else {
+            setShowRangeSection(true);
+        }
+    }, [testState, screenOrientation, screenDimensions])
 
     const [inputValues, setInputValues] = useState({ first: '', last: '', answerInput: '' });
 
@@ -26,7 +36,6 @@ function App() {
             if (Number.isInteger(Number(e.target.value))) {
                 setInputValues({ ...inputValues, [name]: e.target.value });
             }
-
         }
     }
 
@@ -77,7 +86,7 @@ function App() {
         <div id="grid">
             <TopFrame />
 
-            {(screenOrientation === 'portrait' && testState !== 'initial') ?
+            {!showRangeSection ?
                 <RangeButton
                     setTestState={setTestState}
                 />
@@ -115,13 +124,11 @@ function App() {
                         />
                         : null
                 }
-                {screenOrientation === 'landscape' || (screenOrientation === 'portrait' && testState === 'initial') ?
+                {showRangeSection ?
                     <RangeSelection
                         getHandler={getHandler}
                         inputValues={inputValues}
                         makeEquationList={makeEquationList}
-                        testState={testState}
-                        setTestState={setTestState}
                     />
                     : null
                 }

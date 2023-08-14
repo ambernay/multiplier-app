@@ -323,9 +323,10 @@ h4 {
     --range-button-hover: #b8ad942b;
     /* fonts */
     --title-font: 'Londrina Outline', cursive;
-    --work-area-font: 'Callie Chalk Font', sans-serif;
+    --main-font: 'Callie Chalk Font', sans-serif;
     --wood-font: 'Neucha', cursive;
     /* sizes */
+    --main-font-size: calc(0.8rem + 1vw);
     --apple-size: calc(10rem + 5vw);
     --main-grid-columns: 30vw 40vw 30vw;
 }
@@ -370,7 +371,7 @@ button,
 .retest-section,
 .range,
 .range-button-container {
-    font-family: var(--work-area-font);
+    font-family: var(--main-font);
     font-size: calc(0.8rem + 1vw);
     line-height: calc(1.8rem + 1vw);
 }
@@ -502,27 +503,42 @@ main {
 }
 
 .work-area-form {
-    display: grid;
+    width: 100%;
+    justify-content: center;
 }
 
 .equation-text-container {
-    display: flex;
+    display: grid;
+    grid-area: board-mid;
+    grid-template-areas:
+        "left-work-area mid-work-area right-work-area";
+    grid-template-rows: 100%;
+    grid-template-columns: 25% 50% 25%;
+
+    width: 100%;
+}
+
+.equation-text {
+    grid-area: mid-work-area;
 }
 
 .equation-text,
 .correct-answer {
     display: grid;
     align-content: end;
-    line-height: 10vmax;
+    line-height: calc(var(--main-font-size) * 2);
 }
 
 .answer-circle {
-    position: absolute;
-    margin-left: calc(10vw + 3rem);
+
+    display: flex;
+    grid-area: right-work-area;
     background: url('./images/oblong_scribble.png') no-repeat;
     background-size: contain;
     background-position: center;
-    width: 13%;
+    height: fit-content;
+    width: calc(var(--main-font-size) * 6);
+    align-items: center;
 }
 
 .answer-input {
@@ -567,7 +583,7 @@ main {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    font-family: var(--work-area-font);
+    font-family: var(--main-font);
 }
 
 .apple-wrapper {
@@ -620,10 +636,12 @@ form {
     background-color: transparent;
     border-style: none;
     border-bottom: 3px solid var(--chalk-text);
-    font-family: var(--work-area-font);
+    font-family: var(--main-font);
     font-size: inherit;
     line-height: inherit;
     text-align: center;
+    justify-self: center;
+    width: 60%;
     padding: 2px 4px;
     margin: 10px 0 25px 0;
     caret-color: var(--chalk-text);

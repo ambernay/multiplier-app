@@ -9,24 +9,15 @@ import Footer from "./Footer";
 
 function App() {
 
-
-    const [showRangeSection, setShowRangeSection] = useState(true);
     const [testState, setTestState] = useState("initial");
 
-    const screenDimensions = (window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape';
-    const [screenOrientation, setScreenOrientation] = useState(screenDimensions);
+    const [screenOrientation, setScreenOrientation] = useState((window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape');
 
     useEffect(() => {
 
-        window.addEventListener('resize', () => setScreenOrientation(screenDimensions));
+        window.addEventListener('resize', () => setScreenOrientation((window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape'));
 
-        if (screenDimensions === 'portrait' && testState !== 'initial') {
-            setShowRangeSection(false);
-        }
-        else {
-            setShowRangeSection(true);
-        }
-    }, [testState, screenOrientation, screenDimensions])
+    }, [testState]);
 
     const [inputValues, setInputValues] = useState({ first: '', last: '', answerInput: '' });
 
@@ -86,7 +77,7 @@ function App() {
         <div id="grid">
             <TopFrame />
 
-            {!showRangeSection ?
+            {(screenOrientation === 'portrait' && testState !== 'initial') ?
                 <RangeButton
                     setTestState={setTestState}
                 />
@@ -124,7 +115,7 @@ function App() {
                         />
                         : null
                 }
-                {showRangeSection ?
+                {(screenOrientation === 'landscape' || testState === 'initial') ?
                     <RangeSelection
                         getHandler={getHandler}
                         inputValues={inputValues}

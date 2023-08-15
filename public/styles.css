@@ -327,8 +327,9 @@ h4 {
     --wood-font: 'Neucha', cursive;
     /* sizes */
     --main-font-size: calc(0.8rem + 1vw);
-    --apple-size: calc(10rem + 5vw);
+    --apple-size: calc(10rem + 3vw);
     --main-grid-columns: 30vw 40vw 30vw;
+    --answer-circle-position: 15px;
 }
 
 /* #endregion - variables */
@@ -508,37 +509,32 @@ main {
 }
 
 .equation-text-container {
-    display: grid;
-    grid-area: board-mid;
-    grid-template-areas:
-        "left-work-area mid-work-area right-work-area";
-    grid-template-rows: 100%;
-    grid-template-columns: 25% 50% 25%;
-
+    display: flex;
+    justify-content: center;
     width: 100%;
-}
-
-.equation-text {
-    grid-area: mid-work-area;
 }
 
 .equation-text,
 .correct-answer {
-    display: grid;
-    align-content: end;
+    display: flex;
+    justify-content: center;
     line-height: calc(var(--main-font-size) * 2);
 }
 
 .answer-circle {
-
     display: flex;
-    grid-area: right-work-area;
+    position: absolute;
+    margin-left: calc(8rem + 13vh);
+    /* = -15px */
+    margin-top: calc(0px - var(--answer-circle-position));
+    padding: var(--answer-circle-position);
     background: url('./images/oblong_scribble.png') no-repeat;
-    background-size: contain;
+    background-size: calc(var(--main-font-size) + 14vh);
     background-position: center;
     height: fit-content;
     width: calc(var(--main-font-size) * 6);
     align-items: center;
+    justify-content: center;
 }
 
 .answer-input {
@@ -553,7 +549,7 @@ main {
     display: grid;
     position: absolute;
     font-size: 4rem;
-    margin-top: 6rem;
+    margin-top: 4rem;
     margin-left: calc(10vw + 7rem);
 }
 
@@ -640,8 +636,7 @@ form {
     font-size: inherit;
     line-height: inherit;
     text-align: center;
-    justify-self: center;
-    width: 60%;
+    width: 50%;
     padding: 2px 4px;
     margin: 10px 0 25px 0;
     caret-color: var(--chalk-text);
@@ -762,7 +757,8 @@ li:hover::before {
             "board-left board-mid board-right"
             "board-bottom-left board-bottom-mid board-right";
         grid-template-rows: 16vh 40vh 30vh;
-        --main-grid-column: 20vw 60vw 20vw grid-template-columns: var(--main-grid-column);
+        --main-grid-columns: 20vw 60vw 20vw;
+        grid-template-columns: var(--main-grid-columns);
     }
 
     .range {

@@ -74,7 +74,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
             // check answer and mark answer
             markAnswer();
 
-            setTimeout(getNextQuestion, 150000);
+            setTimeout(getNextQuestion, 1500);
         }
     }
     // #endregion handle submit

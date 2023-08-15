@@ -524,7 +524,7 @@ main {
 .answer-circle {
     display: flex;
     position: absolute;
-    margin-left: calc(8rem + 13vh);
+    margin-left: calc(8rem + 25vmin);
     /* = -15px */
     margin-top: calc(0px - var(--answer-circle-position));
     padding: var(--answer-circle-position);
@@ -551,11 +551,8 @@ main {
     font-size: 4rem;
     margin-top: 4rem;
     margin-left: calc(10vw + 7rem);
-}
-
-.mark {
     background-size: cover;
-    padding: 10px;
+    padding: 15px;
 }
 
 #checkmark {
@@ -781,6 +778,10 @@ li:hover::before {
     .range {
         font-size: 0.8rem;
         line-height: 1.8rem;
+    }
+
+    .answer-circle {
+        margin-left: calc(8rem + 12vmin);
     }
 
     .apple-wrapper {

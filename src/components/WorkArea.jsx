@@ -1,112 +1,117 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
-function WorkArea(props) {
-    
-    const [buttonText, setButtonText] = useState("Submit");
-    // #region set equation
-    const minNum = useRef();
-    const maxNum = useRef();
-    const [firstNum, setFirstNum] = useState(minNum.current);
-    const [secondNum, setSecondNum] = useState(maxNum.current);
-    // const [equationArr, setEquationArr] = useState([]);
-    const equationArr = [];
+function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
 
-    useEffect(() => {
-        minNum.current = parseInt(props.firstNumSelection < props.secondNumSelection ? props.firstNumSelection : props.secondNumSelection);
-        maxNum.current = parseInt(props.firstNumSelection < props.secondNumSelection ? props.secondNumSelection : props.firstNumSelection);
-        
-        setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
-        setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
+    const answerInputRef = useRef(false);
 
-    }, [props.firstNumSelection, props.secondNumSelection, maxNum.current, minNum.current]);
-    // #endregion set equation
-    
-    // #region set visibility for work area
-    useEffect(() => {
+    let currentQuestion = equationList[equationIndex];
 
-        const workArea = document.querySelector(".work-area");
+    // hides "submit" button until new question is displayed
+    const [answerComplete, setAnswerComplete] = useState(false);
 
-        if(Number.isNaN(minNum.current) || Number.isNaN(maxNum.current)){
-            workArea.style.visibility = "hidden";
-            console.log(workArea.style.visibility);
-        }
-        else{
-            workArea.style.visibility = "visible";
-            console.log(workArea.style.visibility);
-        }
-    }, [minNum.current, maxNum.current])
-    // #endregion set visibility for work area
-    
-    // #region answer validation
-    
-    const correctAnswer = firstNum * secondNum;
     // answer validation mark
     const [mark, setMark] = useState('✗');
     const [markId, setMarkId] = useState('');
-    const markVisibility = document.querySelector(".mark");
+
+    const correctAnswer = currentQuestion[0] * currentQuestion[1];
+    const userAnswer = parseInt(inputValues['answerInput']);
+    const isCorrect = userAnswer === correctAnswer;
+
     // #endregion answer validation
 
-    // #region equation counter - on button click
-    function getEquationCount(e){
-        const userAnswer = parseInt(document.querySelector(".answer-input").value);
+    const markAnswer = () => {
+
+        // check answer and mark answer
+
+
         // add to total counter on submit
-        if (buttonText==="Submit") {
-            props.equationCounter(e);
-            // add to correct counter only when correct
-            if (userAnswer === correctAnswer) {
-                props.correctAnswerCount(e);
-            }
-        } 
-    }
-    // #endregion equation counter - on button click
+        setEquationCount(equationCount + 1);
 
-    // #region handle submit
-    const handleSubmitAnswer = (e) => {
-        e.preventDefault();
-        // #region check answer and mark answer
-        const userAnswer = parseInt(document.querySelector(".answer-input").value);
-
-        if(userAnswer === correctAnswer) {
+        if (isCorrect) {
             setMark('✔︎');
             setMarkId('checkmark');
+            // add to correct counter only when correct
+            setCorrectAnswerCount(correctAnswerCount + 1);
         }
         else {
             setMark('✗');
             setMarkId('x-mark');
+            setWrongAnswers((prev) => [...prev, currentQuestion]);
         }
-        // #endregion check answer and mark answer
-        // #region change button and checkmark visibility
-        if(buttonText === "Submit") {
-            setButtonText("Next");
-            // show x or check mark 
-            markVisibility.style.visibility = "visible";
+    }
+
+    const getNextQuestion = () => {
+        // reenables and puts focus on input
+        answerInputRef.current.disabled = false;
+        answerInputRef.current.focus();
+
+        // remove current equation from list
+        equationList = equationList.filter(equation => equation !== equationList[equationIndex]);
+        setEquationList(equationList);
+
+        // set new equation
+        setEquationIndex(Math.floor((Math.random() * (equationList.length - 1))));
+
+        if (equationList.length === 0) {
+            setTestState("retest");
         }
-        else if(buttonText === "Next") {
-            setButtonText("Submit");
-            setFirstNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
-            setSecondNum(Math.floor(Math.random() * parseInt(maxNum.current - minNum.current +1) + minNum.current));
-            // resets input after "Next" button click
-            document.querySelector(".answer-input").value = "";
-            // hide x and check mark
-            markVisibility.style.visibility = "hidden";
+
+        setAnswerComplete(false);
+        // empty answer-input field
+        setInputValues({ ...inputValues, 'answerInput': '' });
+    };
+
+    // #region handle submit
+    const handleSubmitAnswer = (e) => {
+        e.preventDefault();
+
+        setAnswerComplete(true);
+
+        if (equationList.length > 0) {
+            // disables input
+            answerInputRef.current.disabled = true;
+
+            // check answer and mark answer
+            markAnswer();
+
+            setTimeout(getNextQuestion, 1500);
         }
-        // #endregion change button and checkmark visibility
     }
     // #endregion handle submit
 
-    return(
-        <div className="work-area" onVisibilityChange={console.log('changed')} >
-            <form className="work-area-form"  onSubmit={handleSubmitAnswer}>
-                <h2 className="equation-text">{firstNum} x {secondNum} =
-                    <input className="input answer-input" type="text" size="4" maxLength={4}/>
-                </h2>
-                <button className="answer-button" 
-                    onClick={(e) => {getEquationCount(e)}}>
-                    {buttonText}
+    return (
+        <section className="work-area">
+            <form className="work-area-form" onSubmit={handleSubmitAnswer}>
+                <div className="equation-text-container">
+                    <h2 className="equation-text">{currentQuestion[0]} x {currentQuestion[1]} =
+                    </h2>
+                    {(!isCorrect && answerComplete) ?
+                        <div className="answer-circle">
+                            <h2 className="correct-answer">{correctAnswer}</h2>
+                        </div>
+                        : null}
+                </div>
+                <label className='sr-only' htmlFor='user-answer'>your answer</label>
+                <input
+                    id='user-answer'
+                    className="input answer-input"
+                    ref={answerInputRef}
+                    onChange={getHandler('answerInput')}
+                    value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
+
+                {/* add visibility-hidden to hide, while keeping position */}
+                <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>
+                    Submit
                 </button>
             </form>
-            <div id={markId} className="mark">{mark}</div>
-        </div>
+            {
+                answerComplete ?
+                    <figure id={markId} className="mark">{mark}
+                        <figcaption className="sr-only">{markId}</figcaption>
+                    </figure>
+                    : null
+            }
+        </section>
     )
 }
 

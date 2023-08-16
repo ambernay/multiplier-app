@@ -123,10 +123,13 @@ function App() {
                     />
                     : null
                 }
-                <Counter
-                    equationCount={equationCount}
-                    correctAnswerCount={correctAnswerCount}
-                />
+                {(screenOrientation === 'portrait' && testState === 'retest') ?
+                    null :
+                    <Counter
+                        equationCount={equationCount}
+                        correctAnswerCount={correctAnswerCount}
+                    />
+                }
             </main>
             <Footer />
         </div>

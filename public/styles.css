@@ -667,10 +667,13 @@ button:hover:not(.toggle) {
 
 /* #region retest */
 .retest-section {
+    grid-area: board-mid;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 10%;
+    margin-top: 1rem;
 }
 
 .retest-container {
@@ -707,6 +710,8 @@ li .retest-button {
     line-height: 2rem;
     width: fit-content;
     padding: 2px 15px;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
 li:hover .retest-button {

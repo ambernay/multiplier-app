@@ -327,6 +327,7 @@ h4 {
     --wood-font: 'Neucha', cursive;
     /* sizes */
     --main-font-size: calc(0.8rem + 1vw);
+    --main-line-height: calc(1.8rem + 1vw);
     --apple-size: calc(10rem + 3vw);
     --main-grid-columns: 30vw 40vw 30vw;
     --answer-circle-position: 15px;
@@ -373,8 +374,8 @@ button,
 .range,
 .range-button-container {
     font-family: var(--main-font);
-    font-size: calc(0.8rem + 1vw);
-    line-height: calc(1.8rem + 1vw);
+    font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
 }
 
 body {
@@ -700,21 +701,18 @@ ul {
 
 li {
     text-align: start;
-    margin-left: -3vw;
+    margin-left: -2vw;
 }
 
 li .retest-button {
-    border-bottom: 3px solid transparent;
+    /* border-bottom: 3px solid transparent; */
+    border-bottom: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 260px / 18px;
     line-height: inherit;
     width: fit-content;
-    padding: 2px 15px;
+    padding: 2px 15px 0 15px;
     font-family: inherit;
     font-size: inherit;
-}
-
-li:hover .retest-button {
-    border-bottom: 3px solid hsla(170, 35%, 69%, 0.7);
 }
 
 li::before {
@@ -722,8 +720,8 @@ li::before {
     content: '✔︎';
     color: var(--checkmark-solid);
     -webkit-text-fill-color: var(--checkmark-transparent);
-    padding: 15px;
-    font-size: 1.6rem;
+    padding: 15px 0 15px 15px;
+    font-size: calc(var(--main-font-size) * 1.5);
 }
 
 li:hover::before {
@@ -798,7 +796,7 @@ li:hover::before {
     }
 
     ul {
-        margin-top: 0;
+        margin-top: 3vh;
         row-gap: 0.5vh;
     }
 }

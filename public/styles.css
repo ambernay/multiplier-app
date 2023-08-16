@@ -693,25 +693,24 @@ ul {
     visibility: hidden;
     list-style-type: none;
     flex-direction: column;
-    align-items: center;
-    row-gap: 35px;
+    row-gap: 3vh;
     padding: 0;
-    margin-top: 40px;
+    margin-top: 5vh;
 }
 
 li {
     text-align: start;
-
+    margin-left: -3vw;
 }
 
 li .retest-button {
     border-bottom: 3px solid transparent;
     border-radius: 260px / 18px;
-    line-height: 2rem;
+    line-height: inherit;
     width: fit-content;
     padding: 2px 15px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: inherit;
 }
 
 li:hover .retest-button {
@@ -792,6 +791,15 @@ li:hover::before {
     .apple-wrapper {
         /* redifine to make apple smaller */
         --apple-size: calc(9rem + 4vw);
+    }
+
+    .retest-section {
+        row-gap: 3vh;
+    }
+
+    ul {
+        margin-top: 0;
+        row-gap: 0.5vh;
     }
 }
 

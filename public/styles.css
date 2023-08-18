@@ -502,7 +502,7 @@ main {
     /* position */
     display: flex;
     justify-content: center;
-    align-self: flex-end;
+    align-self: center;
 }
 
 .work-area-form {
@@ -707,7 +707,6 @@ li .retest-button {
     /* border-bottom: 3px solid transparent; */
     border-bottom: 3px solid hsla(170, 35%, 69%, 0.7);
     border-radius: 260px / 18px;
-    line-height: inherit;
     width: fit-content;
     padding: 2px 15px 0 15px;
     font-family: inherit;
@@ -808,9 +807,6 @@ li:hover::before {
 
 /* horizontal mobile */
 @media (max-height: 500px) {
-    body {
-        --background-green: tomato;
-    }
 
     .work-area,
     .retest-section,

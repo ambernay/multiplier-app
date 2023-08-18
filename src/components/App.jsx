@@ -11,11 +11,11 @@ function App() {
 
     const [testState, setTestState] = useState("initial");
 
-    const [screenOrientation, setScreenOrientation] = useState((window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape');
+    const [screenOrientation, setScreenOrientation] = useState((window.innerWidth <= 761 && window.innerHeight > 500) ? 'portrait' : 'landscape');
 
     useEffect(() => {
 
-        window.addEventListener('resize', () => setScreenOrientation((window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape'));
+        window.addEventListener('resize', () => setScreenOrientation((window.innerWidth <= 761 && window.innerHeight > 500) ? 'portrait' : 'landscape'));
 
     }, [testState]);
 

@@ -32,14 +32,14 @@ function RangeSelection({ getHandler, inputValues, makeEquationList }) {
                         onFocus={(e) => e.target.select()}
                         onChange={getHandler('first')}
                         value={inputValues.first}
-                        type="text" size="2" maxLength={2} autoComplete="off" />
+                        type="tel" size="2" maxLength={2} autoComplete="off" />
 
                     <p className="to">to</p>
 
                     <label className='sr-only' htmlFor='end'>End Range</label>
                     <input id='end' className="input" onFocus={(e) => e.target.select()}
                         onChange={getHandler('last')}
-                        value={inputValues.last} type="text" size="2" maxLength={2} autoComplete="off" />
+                        value={inputValues.last} type="tel" size="2" maxLength={2} autoComplete="off" />
                 </div>
                 <button className="button" ref={buttonRef}
                 >Make Table</button>

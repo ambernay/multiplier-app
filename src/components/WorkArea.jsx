@@ -96,8 +96,9 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
                     id='user-answer'
                     className="input answer-input"
                     ref={answerInputRef}
+
                     onChange={getHandler('answerInput')}
-                    value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
+                    value={inputValues.answerInput} type="tel" size="4" maxLength={4} autoComplete="off" />
 
                 {/* add visibility-hidden to hide, while keeping position */}
                 <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>

@@ -304,6 +304,7 @@ h4 {
 
 /* #region - variables */
 :root {
+    /* background colors */
     --background-green: hsl(121, 71%, 15%);
     --chalk-text: hsla(0, 0%, 100%, 0.7);
     --footer-gradient: linear-gradient(to top, hsl(34, 73%, 20%), hsl(34, 72%, 35%));
@@ -329,8 +330,10 @@ h4 {
     --main-font-size: calc(0.8rem + 1vw);
     --main-line-height: calc(1.8rem + 1vw);
     --apple-size: calc(10rem + 3vw);
-    --main-grid-columns: 30vw 40vw 30vw;
     --answer-circle-position: 15px;
+    /* grid sizes */
+    --body-grid-rows: 7vh 86vh 7vh;
+    --main-grid-columns: 30vw 40vw 30vw;
 }
 
 /* #endregion - variables */
@@ -341,7 +344,7 @@ h4 {
         "header"
         "main"
         "footer";
-    grid-template-rows: 7vh 86vh 7vh;
+    grid-template-rows: var(--body-grid-rows);
     grid-template-columns: 100vw;
 }
 
@@ -750,12 +753,17 @@ li:hover::before {
 
 @media (max-width: 761px) and (min-height: 500px) {
 
+    #grid {
+        /* change to dynamic view height for tablet and mobile */
+        --body-grid-rows: 7dvh 86dvh 7dvh;
+    }
+
     main {
         grid-template-areas:
             "board-top board-top board-top"
             "board-left board-mid board-right"
             "board-bottom-left board-bottom-mid board-right";
-        grid-template-rows: 16vh 38vh 32vh;
+        grid-template-rows: 16dvh 38dvh 32dvh;
         --main-grid-columns: 20vw 60vw 20vw;
         grid-template-columns: var(--main-grid-columns);
     }
@@ -774,17 +782,7 @@ li:hover::before {
 }
 
 /* portrait mobile excluding address bar */
-@media (max-height: 600px) {
-
-    #grid {
-        display: grid;
-        grid-template-areas:
-            "header"
-            "main"
-            "footer";
-        grid-template-rows: 7vh 74vh 7vh;
-        grid-template-columns: 100vw;
-    }
+/* @media (max-height: 600px) {
 
     main {
         grid-template-areas:
@@ -794,6 +792,8 @@ li:hover::before {
         grid-template-rows: 8vh 40vh 26vh;
         --main-grid-columns: 20vw 60vw 20vw;
         grid-template-columns: var(--main-grid-columns);
+
+        background: tomato;
     }
 
     .title-text {
@@ -803,7 +803,7 @@ li:hover::before {
     .apple-wrapper {
         --apple-size: calc(9rem);
     }
-}
+} */
 
 /* horizontal mobile */
 @media (max-height: 500px) {

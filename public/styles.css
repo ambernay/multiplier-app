@@ -333,6 +333,7 @@ h4 {
     --answer-circle-position: 15px;
     /* grid sizes */
     --body-grid-rows: 7vh 86vh 7vh;
+    --main-grid-rows: 16vh 70vh;
     --main-grid-columns: 30vw 40vw 30vw;
 }
 
@@ -394,7 +395,7 @@ main {
     grid-template-areas:
         "board-top board-top board-top"
         "board-left board-mid board-right";
-    grid-template-rows: 16vh 70vh;
+    grid-template-rows: var(--main-grid-rows);
     grid-template-columns: var(--main-grid-columns);
 
     background: url(./images/textures/chalkboard_texture_wgrain.png) no-repeat;
@@ -609,7 +610,10 @@ main {
 /* #region - range selection */
 .range {
     grid-area: board-left;
+    display: flex;
+    flex-direction: column;
     margin: 5vh 20px;
+    justify-content: center;
 }
 
 form {
@@ -763,7 +767,8 @@ li:hover::before {
             "board-top board-top board-top"
             "board-left board-mid board-right"
             "board-bottom-left board-bottom-mid board-right";
-        grid-template-rows: 16dvh 38dvh 32dvh;
+        --main-grid-rows: 16dvh 38dvh 32dvh;
+        grid-template-rows: var(--main-grid-rows);
         --main-grid-columns: 20vw 60vw 20vw;
         grid-template-columns: var(--main-grid-columns);
     }
@@ -807,6 +812,17 @@ li:hover::before {
 
 /* horizontal mobile */
 @media (max-height: 500px) {
+
+    #grid {
+        --body-grid-rows: 7dvh 86dvh 7dvh;
+    }
+
+    main {
+        grid-template-areas:
+            "board-left board-top board-right"
+            "board-left board-mid board-right";
+        --main-grid-rows: 16dvh 70dvh;
+    }
 
     .work-area,
     .retest-section,

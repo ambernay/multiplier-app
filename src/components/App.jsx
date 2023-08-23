@@ -49,7 +49,7 @@ function App() {
         else if (testState === 'active') {
             document.querySelector('#user-answer').focus();
         }
-    }, [testState, setTestState, setEquationCount, setCorrectAnswerCount]);
+    }, [testState]);
 
     const makeEquationList = () => {
 

@@ -398,7 +398,7 @@ main {
     grid-template-rows: var(--main-grid-rows);
     grid-template-columns: var(--main-grid-columns);
 
-    background: url(./images/textures/chalkboard_texture_wgrain.png) no-repeat;
+    background: url(./images/textures/chalkboard_texture_wgrain.png.webp) no-repeat;
     background-size: cover;
     background-position-y: bottom;
 }
@@ -469,6 +469,7 @@ main {
 
 .footer-text {
     font-size: 5vmin;
+    letter-spacing: 0.4rem;
     -webkit-text-fill-color: var(--wood-text-fill);
 }
 
@@ -478,7 +479,6 @@ main {
     color: var(--wood-text-color);
     -webkit-text-stroke: 0.1px #000;
     mix-blend-mode: hard-light;
-    letter-spacing: 0.4rem;
     text-align: center;
     transform: skew(-20deg, 0deg);
 }
@@ -495,6 +495,7 @@ main {
 
 .toggle {
     font-size: 1.8rem;
+    letter-spacing: 0.2rem;
     -webkit-text-fill-color: var(--range-button-text);
 }
 

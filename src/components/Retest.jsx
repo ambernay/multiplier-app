@@ -8,7 +8,7 @@ function Retest({ setTestState, equationCount, correctAnswerCount, setEquationLi
 
         setEquationList(wrongAnswers);
         setEquationIndex(Math.floor((Math.random() * (wrongAnswers.length - 1))));
-        setTestState('active');
+        setTestState('between-states');
         setWrongAnswers([]);
     }
 

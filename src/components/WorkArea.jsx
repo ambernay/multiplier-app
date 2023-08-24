@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equationCount, setEquationCount, correctAnswerCount, setCorrectAnswerCount, equationList, setEquationList, equationIndex, setEquationIndex, setWrongAnswers }) {
 
     const answerInputRef = useRef(false);
+    const buttonRef = useRef(false);
 
     let currentQuestion = equationList[equationIndex];
 
@@ -20,9 +21,6 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
     // #endregion answer validation
 
     const markAnswer = () => {
-
-        // check answer and mark answer
-
 
         // add to total counter on submit
         setEquationCount(equationCount + 1);
@@ -42,6 +40,7 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
 
     const getNextQuestion = () => {
         // reenables and puts focus on input
+        buttonRef.current.disabled = false;
         answerInputRef.current.disabled = false;
         answerInputRef.current.focus();
 
@@ -68,8 +67,9 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
         setAnswerComplete(true);
 
         if (equationList.length > 0) {
-            // disables input
+            // disables input and 'submit' button
             answerInputRef.current.disabled = true;
+            buttonRef.current.disabled = true;
 
             // check answer and mark answer
             markAnswer();
@@ -96,11 +96,12 @@ function WorkArea({ setTestState, getHandler, inputValues, setInputValues, equat
                     id='user-answer'
                     className="input answer-input"
                     ref={answerInputRef}
+
                     onChange={getHandler('answerInput')}
-                    value={inputValues.answerInput} type="text" size="4" maxLength={4} autoComplete="off" />
+                    value={inputValues.answerInput} type="tel" size="4" maxLength={4} autoComplete="off" />
 
                 {/* add visibility-hidden to hide, while keeping position */}
-                <button className={answerComplete ? " hidden answer-button button" : "answer-button button"}>
+                <button className="answer-button button" ref={buttonRef}>
                     Submit
                 </button>
             </form>

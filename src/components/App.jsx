@@ -11,11 +11,11 @@ function App() {
 
     const [testState, setTestState] = useState("initial");
 
-    const [screenOrientation, setScreenOrientation] = useState((window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape');
+    const [screenOrientation, setScreenOrientation] = useState((window.innerWidth <= 761 && window.innerHeight > 500) ? 'portrait' : 'landscape');
 
     useEffect(() => {
 
-        window.addEventListener('resize', () => setScreenOrientation((window.innerWidth <= 761 && window.innerHeight > 660) ? 'portrait' : 'landscape'));
+        window.addEventListener('resize', () => setScreenOrientation((window.innerWidth <= 761 && window.innerHeight > 500) ? 'portrait' : 'landscape'));
 
     }, [testState]);
 
@@ -49,7 +49,7 @@ function App() {
         else if (testState === 'active') {
             document.querySelector('#user-answer').focus();
         }
-    }, [testState, setTestState, setEquationCount, setCorrectAnswerCount]);
+    }, [testState]);
 
     const makeEquationList = () => {
 
@@ -123,10 +123,13 @@ function App() {
                     />
                     : null
                 }
-                <Counter
-                    equationCount={equationCount}
-                    correctAnswerCount={correctAnswerCount}
-                />
+                {(screenOrientation === 'portrait' && testState === 'retest') ?
+                    null :
+                    <Counter
+                        equationCount={equationCount}
+                        correctAnswerCount={correctAnswerCount}
+                    />
+                }
             </main>
             <Footer />
         </div>

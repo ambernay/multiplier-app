@@ -327,6 +327,7 @@ h4 {
     --main-font: 'Callie Chalk Font', sans-serif;
     --wood-font: 'Neucha', cursive;
     /* sizes */
+    --work-area-font-size: calc(1rem + 1vw);
     --main-font-size: calc(0.8rem + 1vw);
     --main-line-height: calc(1.8rem + 1vw);
     --apple-size: calc(10rem + 3vw);
@@ -374,12 +375,17 @@ li::before {
     /* #endregion - font chalk texture */
 }
 
-.work-area,
 .retest-section,
 .range,
 .range-button-container {
     font-family: var(--main-font);
     font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
+}
+
+.work-area {
+    font-family: var(--main-font);
+    font-size: var(--work-area-font-size);
     line-height: var(--main-line-height);
 }
 
@@ -525,6 +531,7 @@ main {
 .correct-answer {
     display: flex;
     justify-content: center;
+    font-size: inherit;
     line-height: calc(var(--main-font-size) * 2);
 }
 
@@ -660,7 +667,7 @@ form {
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     padding: 8px 10px 0 10px;
     font-family: inherit;
-    font-size: inherit;
+    font-size: var(--main-font-size);
     line-height: inherit;
 }
 
@@ -732,7 +739,8 @@ li::before {
     font-size: calc(var(--main-font-size) * 1.5);
 }
 
-li:hover::before {
+li:hover::before,
+li:active::before {
     visibility: visible;
 }
 
@@ -848,6 +856,12 @@ li:hover::before {
 
 .display-none {
     display: none;
+}
+
+:disabled:not(input) {
+    opacity: 0.25;
+    text-shadow: 0 0 20px hsla(0, 0%, 100%, 0.7);
+
 }
 
 /* #endregion media queries */
